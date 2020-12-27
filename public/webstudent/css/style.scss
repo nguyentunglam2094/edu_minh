@@ -90,15 +90,15 @@ header{
             }
             
         }
-        .border-left{
-            @media screen and (min-width: $break-small){
-                border-left: none !important;
-            }
-            @media screen and (min-width: $break-1024){
-                border-left: 1px solid white !important;
-            }
+        // .border-left{
+        //     @media screen and (min-width: $break-small){
+        //         border-left: none !important;
+        //     }
+        //     @media screen and (min-width: $break-1024){
+        //         border-left: 1px solid white !important;
+        //     }
             
-        }
+        // }
     }
       .navbar img {
         width: 140px;
@@ -150,12 +150,12 @@ header{
             }
         }
       .nav-item{
-          @media screen and (min-width: $break-small){
-              border-right: none !important;
-          }
-          @media screen and (min-width: $break-1024){
-            border-right: 1px solid white !important;
-          }
+        //   @media screen and (min-width: $break-small){
+        //       border-right: none !important;
+        //   }
+        //   @media screen and (min-width: $break-1024){
+        //     border-right: 1px solid white !important;
+        //   }
          
           padding: 15px 27.8px;
           position: relative;
@@ -365,7 +365,7 @@ header{
     }
 }
 .dn-subject{
-    margin-top: 40px;
+    margin-top: 60px;
     .list_subject{
         .item_subject{
             box-shadow: 0px 3px 4px rgba(44, 71, 146, 0.15);
