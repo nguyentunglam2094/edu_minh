@@ -4,7 +4,9 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3">
                     <div class="logo">
-                        <img src="{{ asset('webstudent/images/logo448x152.png') }}" alt="" class="img-fluid">
+                        <a href="{{ route('home.page') }}">
+                            <img src="{{ asset('webstudent/images/logo448x152.png') }}" alt="" class="img-fluid">
+                        </a>
                     </div>
                 </div>
                 <div class="col-lg-9 col-md-9">

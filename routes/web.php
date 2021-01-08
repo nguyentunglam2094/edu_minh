@@ -17,4 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['namespace' => 'Students'], function () {
     // route::get('trang-chu', 'HomeController@index')->name('home.page');
     route::get('/', 'HomeController@index')->name('home.page');
+    Route::group(['prefix' => 'subject'], function () {
+        route::get('/{id}', 'SubjectController@detailSubject')->name('detail.subject');
+    });
 });

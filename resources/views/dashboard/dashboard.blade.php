@@ -100,21 +100,21 @@
         </div>
         <div class="list_subject">
             <div class="row">
-
+                @foreach ($listEx as $type)
                 <div class="col-lg-3 col-md-3 mb-4">
                     <div class="item_subject">
-                        <a href="detail_exercise.html">
+                        <a href="{{ route('detail.subject', $type->id) }}">
                             <div class="img_subject">
                                 <img src="images/De-Thi-Mon-Toan-2020.jpg" alt="" class="img-fluid">
                             </div>
                             <div class="infor_subject">
-                                <h4>Đề thi môn toán 2020</h4>
-                                <div class="name_subject"><span>Môn</span>: <span>Toán học</span></div>
+                                <h4>{{ $type->title }}</h4>
+                                <div class="name_subject"><span>Môn</span>: <span>{{ $type->subject->title }}</span></div>
                             </div>
                         </a>
                     </div>
                 </div>
-
+                @endforeach
             </div>
         </div>
     </div>
