@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Dashboard')
+@section('title', 'Dạng bài tập')
 @section('css')
 
 @endsection
@@ -26,7 +26,7 @@
                         <ul class="term-list">
                             @foreach ($listEx as $ex)
                                 <li class="term-item ">
-                                    <a href="">{{ $ex->code .'. '. $ex->question }}</a>
+                                    <a href="{{ route('detail.exersire', $ex->id) }}">{{ $ex->code .'. '. $ex->question }}</a>
                                 </li>
                             @endforeach
                         </ul>
@@ -40,98 +40,30 @@
     <div class="container">
         <div class="row mb-2">
             <div class="col-lg-10 col-md-10">
-                <h2>Danh sách các môn học khác</h2>
+                <h2>Dạng bài tập tương tự</h2>
             </div>
-            <div class="col-lg-2 col-md-2 d-flex align-items-center justify-content-end">
+            {{-- <div class="col-lg-2 col-md-2 d-flex align-items-center justify-content-end">
                 <a href="#" class="review_all">Xem tất cả <i class="fas fa-angle-right"></i></a>
-            </div>
+            </div> --}}
         </div>
         <div class="carousel-wrap">
             <div class="owl-carousel">
+                @foreach ($listSubject as $listType)
                 <div class="item">
                     <a href="#">
                         <div class="img_item">
-                            <img src="images/maxresdefault (1).jpg" alt="">
+                            <img src="{{ !empty($listType->image) ? asset($listType->image) : asset('webstudent/images/hinh-anh-dep-co-giao-dung-lop-giang-bai_015649220.jpg') }}" alt="">
                         </div>
                     </a>
                     <div class="box_infor">
-                        <h4><a href="#">Toán học 11</a></h4>
+                        <h4><a href="#">{{ $listType->title }}</a></h4>
                         <div class="description">
-                            Cung cấp những kiến thức từ vỡ lòng - là kiến thức học sinh muốn học Hóa cần phải biết (công thức tính mol, cân bằng phương trình phản ứng...) đến nền tảng cốt lõi (muốn ôn thi phải biết) (cấu tạo nguyên tử, liên kết hóa học...), là bước đệm để ôn thi.
+                            {!! $listType->description !!}
                         </div>
                         <a href="#" class="link_detail">Xem chi tiết</a>
                     </div>
                 </div>
-                <div class="item">
-                    <a href="#">
-                        <div class="img_item">
-                            <img src="images/giao-vien-01.jpg" alt="">
-                        </div>
-                    </a>
-                    <div class="box_infor">
-                        <h4><a href="#">Vật lý 11</a></h4>
-                        <div class="description">
-                            Cung cấp những kiến thức từ vỡ lòng - là kiến thức học sinh muốn học Hóa cần phải biết (công thức tính mol, cân bằng phương trình phản ứng...) đến nền tảng cốt lõi (muốn ôn thi phải biết) (cấu tạo nguyên tử, liên kết hóa học...), là bước đệm để ôn thi.
-                        </div>
-                        <a href="#" class="link_detail">Xem chi tiết</a>
-                    </div>
-                </div>
-                <div class="item">
-                    <a href="#">
-                        <div class="img_item">
-                            <img src="images/hinh-anh-dep-co-giao-dung-lop-giang-bai_015649220.jpg" alt="">
-                        </div>
-                    </a>
-                    <div class="box_infor">
-                        <h4><a href="#">Hoá học 11</a></h4>
-                        <div class="description">
-                            Cung cấp những kiến thức từ vỡ lòng - là kiến thức học sinh muốn học Hóa cần phải biết (công thức tính mol, cân bằng phương trình phản ứng...) đến nền tảng cốt lõi (muốn ôn thi phải biết) (cấu tạo nguyên tử, liên kết hóa học...), là bước đệm để ôn thi.
-                        </div>
-                        <a href="#" class="link_detail">Xem chi tiết</a>
-                    </div>
-                </div>
-                <div class="item">
-                    <a href="#">
-                        <div class="img_item">
-                            <img src="images/ta-co-giao-lop-6-nhung-bai-van-mau-hay.jpg" alt="">
-                        </div>
-                    </a>
-                    <div class="box_infor">
-                        <h4><a href="#">Sinh học 11</a></h4>
-                        <div class="description">
-                            Cung cấp những kiến thức từ vỡ lòng - là kiến thức học sinh muốn học Hóa cần phải biết (công thức tính mol, cân bằng phương trình phản ứng...) đến nền tảng cốt lõi (muốn ôn thi phải biết) (cấu tạo nguyên tử, liên kết hóa học...), là bước đệm để ôn thi.
-                        </div>
-                        <a href="#" class="link_detail">Xem chi tiết</a>
-                    </div>
-                </div>
-                <div class="item">
-                    <a href="#">
-                        <div class="img_item">
-                            <img src="images/14523271-1400266116653532-1943337704040564012-n-1475230770840.jpg" alt="">
-                        </div>
-                    </a>
-                    <div class="box_infor">
-                        <h4><a href="#">Tiếng anh 11</a></h4>
-                        <div class="description">
-                            Cung cấp những kiến thức từ vỡ lòng - là kiến thức học sinh muốn học Hóa cần phải biết (công thức tính mol, cân bằng phương trình phản ứng...) đến nền tảng cốt lõi (muốn ôn thi phải biết) (cấu tạo nguyên tử, liên kết hóa học...), là bước đệm để ôn thi.
-                        </div>
-                        <a href="#" class="link_detail">Xem chi tiết</a>
-                    </div>
-                </div>
-                <div class="item">
-                    <a href="#">
-                        <div class="img_item">
-                            <img src="images/20-11-tri-an-thay-co-2.jpg" alt="">
-                        </div>
-                    </a>
-                    <div class="box_infor">
-                        <h4><a href="#">Văn học 11</a></h4>
-                        <div class="description">
-                            Cung cấp những kiến thức từ vỡ lòng - là kiến thức học sinh muốn học Hóa cần phải biết (công thức tính mol, cân bằng phương trình phản ứng...) đến nền tảng cốt lõi (muốn ôn thi phải biết) (cấu tạo nguyên tử, liên kết hóa học...), là bước đệm để ôn thi.
-                        </div>
-                        <a href="#" class="link_detail">Xem chi tiết</a>
-                    </div>
-                </div>
+                @endforeach
             </div>
           </div>
     </div>

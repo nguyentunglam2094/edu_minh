@@ -26,7 +26,7 @@
     <div class="container">
         <div class="nav-wrapper">
             <nav class="navbar">
-                <a href="index.html" class="mobile_logo">
+                <a href="{{ route('home.page') }}" class="mobile_logo">
                     <img src="{{ asset('webstudent/images/logo448x152.png') }}" alt="">
                 </a>
 
@@ -36,14 +36,14 @@
 
                 <ul class="nav no-search" id="menu-mobile">
                     <div class="logo_mobile">
-                        <a href="index.html">
+                        <a href="{{ route('home.page') }}">
                             <img src="{{ asset('webstudent/images/logo448x152.png') }}" alt="">
                         </a>
                     </div>
                     <div class="close" id="close-sidebar">
                         <img src="images/cancel.png" alt="">
                     </div>
-                    <li class="nav-item border-left"><a href="index.html">Trang chủ</a></li>
+                    <li class="nav-item border-left"><a href="{{ route('home.page') }}">Trang chủ</a></li>
                     <li class="nav-item dn-nav_item">
                         <a href="" class="item_dropdown dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Toán học</a>
                         <div class="dropdown-menu dropdown-item-nav" aria-labelledby="dropdownMenuButton">
@@ -68,22 +68,15 @@
                             <a class="dropdown-item" href="#">Lớp 3</a>
                         </div>
                     </li>
-                    <li class="nav-item dn-nav_item">
+                    {{-- <li class="nav-item dn-nav_item">
                         <a href="" class="item_dropdown dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sinh học</a>
                         <div class="dropdown-menu dropdown-item-nav" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="#">Lớp 1</a>
                             <a class="dropdown-item" href="#">Lớp 2</a>
                             <a class="dropdown-item" href="#">Lớp 3</a>
                         </div>
-                    </li>
-                    <li class="nav-item dn-nav_item">
-                        <a href="" class="item_dropdown dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Văn học</a>
-                        <div class="dropdown-menu dropdown-item-nav" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Lớp 1</a>
-                            <a class="dropdown-item" href="#">Lớp 2</a>
-                            <a class="dropdown-item" href="#">Lớp 3</a>
-                        </div>
-                    </li>
+                    </li> --}}
+
                     <li class="nav-item dn-nav_item">
                         <a href="" class="item_dropdown dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ngoại ngữ</a>
                         <div class="dropdown-menu dropdown-item-nav" aria-labelledby="dropdownMenuButton">
@@ -91,6 +84,9 @@
                             <a class="dropdown-item" href="#">Lớp 2</a>
                             <a class="dropdown-item" href="#">Lớp 3</a>
                         </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">Thi online</a>
                     </li>
                     <li class="nav-item">
                         <a href="#">Liên hệ</a>

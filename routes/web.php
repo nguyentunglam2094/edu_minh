@@ -17,7 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::group(['namespace' => 'Students'], function () {
     // route::get('trang-chu', 'HomeController@index')->name('home.page');
     route::get('/', 'HomeController@index')->name('home.page');
-    Route::group(['prefix' => 'subject'], function () {
+    Route::group(['prefix' => 'dang-bai-tap'], function () {
         route::get('/{id}', 'SubjectController@detailSubject')->name('detail.subject');
+    });
+    Route::group(['prefix' => 'bai-tap'], function () {
+        route::get('/chi-tiet/{id}', 'ExerController@detailExer')->name('detail.exersire');
+        route::get('/comment-bai-tap', 'ExerController@loadCommentEx')->name('comment.exersire');
     });
 });

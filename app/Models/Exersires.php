@@ -12,6 +12,15 @@ class Exersires extends Model
     {
         return $this->hasOne(ExerciseType::class, 'id', 'exercises_type_id');
     }
+    public function comments()
+    {
+        return $this->hasMany(Comments::class, 'exercise_id', 'id');
+    }
+
+    public function getDetail($id)
+    {
+        return $this->with(['typeExercire'])->where($this->primaryKey, $id)->first();
+    }
 
     public function getExersires($type_id = 0)
     {
@@ -19,5 +28,14 @@ class Exersires extends Model
             return $this->where('exercises_type_id', $type_id)->with('typeExercire')->orderBy('id','desc')->get();
         }
         return $this->with('typeExercire')->orderBy('id','desc')->get();
+    }
+
+    /**
+     * danh sách bài tập tương tự
+     */
+    public function listExerSame($detailEx)
+    {
+        return $this->with('typeExercire.subject')->where('id', '!=', $detailEx->id)->where('exercises_type_id', $detailEx->exercises_type_id)
+        ->orderBy('id', 'desc')->get();
     }
 }

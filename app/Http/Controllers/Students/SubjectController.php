@@ -13,11 +13,16 @@ class SubjectController extends Controller
     //
     public function detailSubject(ExerciseType $exerciseType, Exersires $exersires, $subject_id)
     {
-        $detailSubject = $exerciseType->detail($subject_id);
+        $detailType = $exerciseType->detail($subject_id);
+        if(empty($detailType)){
+            return back();
+        }
         $listEx = $exersires->getExersires($subject_id);
+        $listSubject = $exerciseType->getList($detailType);
         return view('subject.index')->with([
-            'detail'=> $detailSubject,
+            'detail'=> $detailType,
             'listEx'=> $listEx,
+            'listSubject'=> $listSubject,
         ]);
     }
 }

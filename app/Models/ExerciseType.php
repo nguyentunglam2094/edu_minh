@@ -24,4 +24,13 @@ class ExerciseType extends Model
         return $this->with(['subject'])->where($this->primaryKey, $id)->first();
     }
 
+    /**
+     * lấy danh sách danh mục khác
+     */
+    public function getList($detailType)
+    {
+        return $this->with(['subject'])->where($this->primaryKey, '!=', $detailType->id)
+        ->where('subject_id', $detailType->subject_id)
+        ->where('class_id', $detailType->class_id)->orderBy('id','desc')->Get();
+    }
 }
