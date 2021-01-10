@@ -43,11 +43,11 @@
                             <a href="index.html" class="mobile_logo">
                                 <img src="images/logo448x152.png" alt="">
                             </a>
-    
+
                             <div class="open-menu" id="open-menu">
                                 <img src="images/menu.png" alt="">
                             </div>
-    
+
                             <ul class="nav no-search" id="menu-mobile">
                                 <div class="logo_mobile">
                                     <a href="index.html">
@@ -119,9 +119,9 @@
                     <h4>Câu 1 (trang 9 sgk Ngữ văn 11 Tập 1):</h4>
                     <div class="detail_exercise">
                         * Quang cảnh trong phủ Chúa
-                        
+
                         - Phải đi qua nhiều lần cửa, với những dãy hành lang dài quanh co nối nhau liên tiếp, ở mỗi cửa đều có lính canh gác, ai muốn vào phải có thẻ.
-                        
+
                         - Vườn hoa trong phủ Chúa cây cối um tùm, chim kêu ríu rít, danh hoa cỏ thắm, gió đưa thoang thoảng mùi hương
                         - Bên trong phủ là nhà Đại đường, Quyển bổng, Gác tía với kiệu son, võng điều, đồ nghi trượng sơn son thếp vàng và những đồ đạc nhân gian chưa từng thấy.
 
@@ -254,7 +254,7 @@
                                 </div>
                             </div>
                         </div>
-            
+
                         <div class="body_comment">
                             <div class="row">
                                 <div class="avatar_comment col-md-1">
@@ -292,7 +292,7 @@
                                                 <span aria-hidden="true"> · </span>
                                                 <a class="replay" href="javascript:void(0):">Reply</a>
                                                 <span aria-hidden="true"> · </span>
-                                                <i class="far fa-thumbs-up"></i> <span class="count">1</span> 
+                                                <i class="far fa-thumbs-up"></i> <span class="count">1</span>
                                                 <span aria-hidden="true"> · </span>
                                                 <span>26m</span>
                                             </div>
@@ -309,7 +309,7 @@
                                                             <span aria-hidden="true"> · </span>
                                                             <a class="replay" href="javascript:void(0):">Reply</a>
                                                             <span aria-hidden="true"> · </span>
-                                                            <i class="far fa-thumbs-up"></i> <span class="count">1</span> 
+                                                            <i class="far fa-thumbs-up"></i> <span class="count">1</span>
                                                             <span aria-hidden="true"> · </span>
                                                             <span>26m</span>
                                                         </div>
@@ -319,9 +319,9 @@
                                             </ul>
                                         </div>
                                     </li>
-                                    
+
                                     <!-- Start List Comment 2 -->
-                                    <li class="box_result row">
+                                    <!-- <li class="box_result row">
                                         <div class="avatar_comment col-md-1">
                                             <img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>
                                         </div>
@@ -333,13 +333,13 @@
                                                 <span aria-hidden="true"> · </span>
                                                 <a class="replay" href="javascript:void(0):">Reply</a>
                                                 <span aria-hidden="true"> · </span>
-                                                <i class="far fa-thumbs-up"></i> <span class="count">1</span> 
+                                                <i class="far fa-thumbs-up"></i> <span class="count">1</span>
                                                 <span aria-hidden="true"> · </span>
                                                 <span>26m</span>
                                             </div>
                                             <ul class="child_replay"></ul>
                                         </div>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             <button class="show_more" type="button">Load 10 more comments</button>
                             </div>
@@ -347,7 +347,7 @@
                     </div>
                 </div>
             </section>
-            
+
             <section class="dn-footer">
                 <div class="container">
                     <div class="row">
@@ -388,7 +388,7 @@
                     </div>
                 </div>
             </section>
-            
+
         </header>
     </div>
 
@@ -421,14 +421,14 @@
                     '</div>';
                 document.getElementById('list_comment').prepend(el);
                 $('.commentar').val('');
-            }
+        }
 
             $(document).ready(function() {
                 $('#list_comment').on('click', '.like', function (e) {
                     $current = $(this);
                     var x = $current.closest('div').find('.like').text().trim();
                     var y = parseInt($current.closest('div').find('.count').text().trim());
-                    
+
                     if (x === "Like") {
                         $current.closest('div').find('.like').text('Unlike');
                         $current.closest('div').find('.count').text(y + 1);
@@ -440,7 +440,7 @@
                         $current.closest('div').find('.count').text(y - 1);
                     }
                 });
-                
+
                 $('#list_comment').on('click', '.replay', function (e) {
                     cancel_reply();
                     $current = $(this);
@@ -472,28 +472,28 @@
             });
 
             function submit_reply(){
-            var comment_replay = $('.comment_replay').val();
-            el = document.createElement('li');
-            el.className = "box_reply row";
-            el.innerHTML =
-                    '<div class=\"avatar_comment col-md-1\">'+
-                    '<img src=\"https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg\" alt=\"avatar\"/>'+
-                    '</div>'+
-                    '<div class=\"result_comment col-md-11\">'+
-                    '<h4>Anonimous</h4>'+
-                    '<p>'+ comment_replay +'</p>'+
-                    '<div class=\"tools_comment\">'+
-                    '<a class=\"like\" href=\"javascript:void(0):\">Like</a><span aria-hidden=\"true\"> · </span>'+
-                    '<i class="\far fa-thumbs-up\"></i> <span class=\"count\">0</span>'+
-                    '<span aria-hidden=\"true\"> · </span>'+
-                    '<a class=\"replay\" href=\"javascript:void(0):\">Reply</a><span aria-hidden=\"true\"> · </span>'+
-                        '<span>1m</span>'+
-                    '</div>'+
-                    '<ul class="child_replay"></ul>'+
-                    '</div>';
-                $current.closest('li').find('.child_replay').prepend(el);
-                $('.comment_replay').val('');
-                cancel_reply();
+                var comment_replay = $('.comment_replay').val();
+                el = document.createElement('li');
+                el.className = "box_reply row";
+                el.innerHTML =
+                        '<div class=\"avatar_comment col-md-1\">'+
+                        '<img src=\"https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg\" alt=\"avatar\"/>'+
+                        '</div>'+
+                        '<div class=\"result_comment col-md-11\">'+
+                        '<h4>Anonimous</h4>'+
+                        '<p>'+ comment_replay +'</p>'+
+                        '<div class=\"tools_comment\">'+
+                        '<a class=\"like\" href=\"javascript:void(0):\">Like</a><span aria-hidden=\"true\"> · </span>'+
+                        '<i class="\far fa-thumbs-up\"></i> <span class=\"count\">0</span>'+
+                        '<span aria-hidden=\"true\"> · </span>'+
+                        '<a class=\"replay\" href=\"javascript:void(0):\">Reply</a><span aria-hidden=\"true\"> · </span>'+
+                            '<span>1m</span>'+
+                        '</div>'+
+                        '<ul class="child_replay"></ul>'+
+                        '</div>';
+                    $current.closest('li').find('.child_replay').prepend(el);
+                    $('.comment_replay').val('');
+                    cancel_reply();
             }
 
             function cancel_reply(){

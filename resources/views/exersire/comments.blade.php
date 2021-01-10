@@ -9,14 +9,15 @@
             <h4>{{ !empty($comment->user) ? $comment->user->name : 'No name' }}</h4>
             <p>{!! $comment->comment !!}</p>
             <div class="tools_comment">
-                {{-- <a class="like" href="javascript:void(0):">Like</a>
-                <span aria-hidden="true"> · </span> --}}
-                <a class="replay" href="javascript:void(0):">Reply</a>
+                {{--  <a class="like" href="javascript:void(0):">Like</a>
+                <span aria-hidden="true"> · </span>  --}}
+                <a class="replay" href="javascript:void(0);">Reply</a>
                 <span aria-hidden="true"> · </span>
                 {{-- <i class="far fa-thumbs-up"></i> <span class="count">1</span>
                 <span aria-hidden="true"> · </span> --}}
                 <span>26m</span>
             </div>
+            <ul class="child_replay"></ul>
             @if (count($comment->parentComment) > 0)
                 <ul class="child_replay">
                     @foreach ($comment->parentComment as $parentComment)
@@ -30,10 +31,10 @@
                             <div class="tools_comment">
                                 {{-- <a class="like" href="javascript:void(0):">Like</a>
                                 <span aria-hidden="true"> · </span> --}}
-                                <a class="replay" href="javascript:void(0):">Reply</a>
+                                <a class="replay" href="javascript:void(0);">Reply</a>
                                 <span aria-hidden="true"> · </span>
-                                {{-- <i class="far fa-thumbs-up"></i> <span class="count">1</span>
-                                <span aria-hidden="true"> · </span> --}}
+                                {{--  <i class="far fa-thumbs-up"></i> <span class="count">1</span>
+                                <span aria-hidden="true"> · </span>  --}}
                                 <span>26m</span>
                             </div>
                             <ul class="child_replay"></ul>
