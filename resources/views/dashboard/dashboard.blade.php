@@ -44,9 +44,9 @@
                 @if ($teachers->count() > 0)
                     @foreach ($teachers as $teacher)
                     <div class="item">
-                        <a href="detail_teacher.html">
+                        <a href="#">
                             <div class="img_item">
-                                <img src="{{ asset('webstudent/images/maxresdefault (1).jpg') }}" alt="">
+                                <img src="{{ !empty($teacher->avatar) ? asset($teacher->avatar) : asset('/images/no-avatar-7.png') }}" alt="">
                             </div>
                         </a>
                         <div class="box_infor">
@@ -54,7 +54,7 @@
                             <div class="description">
                                 {!! $teacher->description !!}
                             </div>
-                            <a href="detail_teacher.html" class="link_detail">Xem chi tiết</a>
+                            <a href="#" class="link_detail">Xem chi tiết</a>
                         </div>
                     </div>
                     @endforeach
@@ -95,7 +95,7 @@
                 <h2>Các dạng bài tập</h2>
             </div>
             <div class="col-lg-2 col-md-2 d-flex align-items-center justify-content-end">
-                <a href="#" class="review_all">Xem tất cả <i class="fas fa-angle-right"></i></a>
+                <a href="{{ route('list.subject') }}" class="review_all">Xem tất cả <i class="fas fa-angle-right"></i></a>
             </div>
         </div>
         <div class="list_subject">
@@ -105,7 +105,7 @@
                     <div class="item_subject">
                         <a href="{{ route('detail.subject', $type->id) }}">
                             <div class="img_subject">
-                                <img src="images/De-Thi-Mon-Toan-2020.jpg" alt="" class="img-fluid">
+                                <img src="{{ !empty($type->image) ? asset($type->image) : asset('images/no-image.png') }}" alt="" class="img-fluid">
                             </div>
                             <div class="infor_subject">
                                 <h4>{{ $type->title }}</h4>

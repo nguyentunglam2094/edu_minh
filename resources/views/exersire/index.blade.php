@@ -29,9 +29,9 @@
             <div class="owl-carousel">
                @foreach ($listSame as $item)
                <div class="item_subject">
-                <a href="detail_exercise.html">
+                <a href="#">
                     <div class="img_subject">
-                        <img src="{{ $item->image_question }}" alt="" class="img-fluid">
+                        <img src="{{ !empty($item->image_question) ? asset($item->image_question) : asset('images/no-image.png') }}" alt="" class="img-fluid">
                     </div>
                     <div class="infor_subject">
                         <h4>#{{ $item->code . '. ' .$item->question }}</h4>

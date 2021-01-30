@@ -14,9 +14,19 @@ class ExerciseType extends Model
         return $this->hasOne(Subject::class, 'id', 'subject_id');
     }
 
-    public function getTypeEx()
+    public function getTypeEx($paginate = 0, $class = null, $subject = null)
     {
-        return $this->with(['subject'])->get();
+        if($paginate != 0){
+            $data = $this->with(['subject']);
+            if(!empty($subject)){
+                $data =  $data->where('subject_id', $subject);
+            }
+            if(!empty($class)){
+                $data =  $data->where('class_id', $class);
+            }
+            return $data->orderBy('id', 'desc')->paginate(12);
+        }
+        return $this->with(['subject'])->orderBy('id', 'desc')->get();
     }
 
     public function detail($id)

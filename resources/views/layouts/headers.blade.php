@@ -9,13 +9,39 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-9 col-md-9">
+                <div class="col-lg-6 col-md-6">
                     <div class="search_box">
                         <div class="icon_search">
                             <i class="fas fa-search"></i>
                         </div>
                         <input type="text" class="input_search form-control" placeholder="Searching..." name="search">
                     </div>
+                </div>
+                <div class="col-lg-3 col-md-3 d-flex justify-content-center align-items-center">
+                    @if (!\Auth::check())
+                        <div class="box_login">
+                            <a href="{{ route('view.login') }}" id="btnLogin" style="color: black;">
+                                <i class="fas fa-user"></i> Đăng nhập
+                            </a> |
+                            <a href="{{ route('signup.view') }}" style="color: black;">
+                                <i class="fas fa-user-friends"></i> Đăng ký
+                            </a>
+                        </div>
+                    @else
+                        <div class="box_login_success">
+                            <a href="javascript:void(0);" class="dropdown-login-sucess dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div class="avatar">
+                                    <img src="{{ !empty(\Auth::user()->avatar) ? asset(\Auth::user()->avatar) : asset('images/user.png') }}" class="img-fluid" alt="">
+                                </div>
+                                <div class="name_user">{{ !empty(\Auth::user()->name) ? \Auth::user()->name : 'User' }}</div>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="{{ route('update.profile.view') }}">Trang cá nhân</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ route('logout') }}">Đăng xuất</a>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -47,25 +73,25 @@
                     <li class="nav-item dn-nav_item">
                         <a href="" class="item_dropdown dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Toán học</a>
                         <div class="dropdown-menu dropdown-item-nav" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="detail_subject.html">Lớp 1</a>
-                            <a class="dropdown-item" href="detail_subject.html">Lớp 2</a>
-                            <a class="dropdown-item" href="detail_subject.html">Lớp 3</a>
+                            @for ($i = 6; $i < 13; $i++)
+                                <a class="dropdown-item" href="{{ route('list.subject.class', ['subject'=>'toan-hoc', 'class'=>'lop-'.$i]) }}">Lớp {{ $i }}</a>
+                            @endfor
                         </div>
                     </li>
                     <li class="nav-item dn-nav_item">
                         <a href="" class="item_dropdown dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Vật lý</a>
                         <div class="dropdown-menu dropdown-item-nav" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Lớp 1</a>
-                            <a class="dropdown-item" href="#">Lớp 2</a>
-                            <a class="dropdown-item" href="#">Lớp 3</a>
+                            @for ($i = 6; $i < 13; $i++)
+                                <a class="dropdown-item" href="{{ route('list.subject.class', ['subject'=>'vat-ly', 'class'=>'lop-'.$i]) }}">Lớp {{ $i }}</a>
+                            @endfor
                         </div>
                     </li>
                     <li class="nav-item dn-nav_item">
                         <a href="" class="item_dropdown dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hoá học</a>
                         <div class="dropdown-menu dropdown-item-nav" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Lớp 1</a>
-                            <a class="dropdown-item" href="#">Lớp 2</a>
-                            <a class="dropdown-item" href="#">Lớp 3</a>
+                            @for ($i = 6; $i < 13; $i++)
+                                <a class="dropdown-item" href="{{ route('list.subject.class', ['subject'=>'hoa-hoc', 'class'=>'lop-'.$i]) }}">Lớp {{ $i }}</a>
+                            @endfor
                         </div>
                     </li>
                     {{-- <li class="nav-item dn-nav_item">
@@ -78,16 +104,24 @@
                     </li> --}}
 
                     <li class="nav-item dn-nav_item">
-                        <a href="" class="item_dropdown dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ngoại ngữ</a>
+                        <a href="" class="item_dropdown dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tiếng Anh</a>
                         <div class="dropdown-menu dropdown-item-nav" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Lớp 1</a>
-                            <a class="dropdown-item" href="#">Lớp 2</a>
-                            <a class="dropdown-item" href="#">Lớp 3</a>
+                            @for ($i = 6; $i < 13; $i++)
+                                <a class="dropdown-item" href="{{ route('list.subject.class', ['subject'=>'tieng-anh', 'class'=>'lop-'.$i]) }}">Lớp {{ $i }}</a>
+                            @endfor
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <a href="#">Thi online</a>
+
+                    <li class="nav-item dn-nav_item">
+                        <a href="" class="item_dropdown dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Thi online</a>
+                        <div class="dropdown-menu dropdown-item-nav" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="{{ route('index.test.online', 'toan-hoc') }}">Toán</a>
+                            <a class="dropdown-item" href="{{ route('index.test.online', 'vat-ly') }}">Vật lý</a>
+                            <a class="dropdown-item" href="{{ route('index.test.online', 'hoa-hoc') }}">Hóa học</a>
+                            <a class="dropdown-item" href="{{ route('index.test.online', 'tieng-anh') }}">Tiếng anh</a>
+                        </div>
                     </li>
+
                     <li class="nav-item">
                         <a href="#">Liên hệ</a>
                     </li>

@@ -13,4 +13,9 @@ class Subject extends Model
     {
         return $this->where($this->primaryKey, $id)->first();
     }
+
+    public function getDetailBySlug($slug)
+    {
+        return $this->where('slug', $slug)->first();
+    }
 }

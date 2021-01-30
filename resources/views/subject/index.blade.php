@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-lg-3 col-md-3">
                 <div class="avatar">
-                    <img src="{{ !empty($detail->image) ? asset($detail->image) : asset('webstudent/images/hinh-anh-dep-co-giao-dung-lop-giang-bai_015649220.jpg') }}" alt="" class="img-fluid">
+                    <img src="{{ !empty($detail->image) ? asset($detail->image) : asset('images/no-image.png') }}" alt="" class="img-fluid">
                 </div>
             </div>
             <div class="col-lg-5 col-md-5">

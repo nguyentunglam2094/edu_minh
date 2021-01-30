@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Libraries\Ultilities;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -18,7 +19,7 @@ class Users extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'phone', 'avatar', 'dob', 'address'
     ];
 
     /**
@@ -49,6 +50,33 @@ class Users extends Authenticatable
             }
         }
         return $key;
+    }
+
+    public function register($request)
+    {
+        $data = [
+            'email'=>Ultilities::clearXSS($request->email),
+            'name'=>Ultilities::clearXSS($request->name),
+            'phone'=>Ultilities::clearXSS($request->phone),
+            'password'=>bcrypt(Ultilities::clearXSS($request->password)),
+        ];
+        return $this->create($data);
+    }
+
+    public function updateProfile($request)
+    {
+        $data = [
+            'name'=>Ultilities::clearXSS($request->name),
+            'phone'=>Ultilities::clearXSS($request->phone),
+            'address'=>Ultilities::clearXSS($request->address),
+        ];
+        if($request->hasFile('image')){
+            $push = [
+                'avatar'=>Ultilities::uploadFile($request->image),
+            ];
+            $data += $push;
+        }
+        return $this->where($this->primaryKey, $request->user()->id)->update($data);
     }
 
 }
