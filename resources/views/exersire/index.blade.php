@@ -143,11 +143,13 @@
 
 </script>
 <script>
+    var parent_comment = null;
         $(document).ready(function() {
 
             $('body').on('click', '.replay', function (e) {
                 cancel_reply();
                 $current = $(this);
+                parent_comment = $(this).data('parentid');
                 el = document.createElement('li');
                 el.className = "box_reply row";
                 el.innerHTML =
@@ -160,10 +162,6 @@
                             '<textarea class=\"comment_replay\" placeholder=\"Add a comment...\"></textarea>'+
                             '<div class=\"box_post\">'+
                                 '<div class=\"pull-right\">'+
-                                '<span>'+
-                                    '<img src=\"https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg\" alt=\"avatar\" />'+
-                                    '<i class=\"fa fa-caret-down\"></i>'+
-                                '</span>'+
                                 '<button class=\"cancel\" onclick=\"cancel_reply()\" type=\"button\">Cancel</button>'+
                                 '<button onclick=\"submit_reply()\" type=\"button\" value=\"1\">Reply</button>'+
                                 '</div>'+
@@ -176,28 +174,27 @@
         });
 
         function submit_reply(){
-            var comment_replay = $('.comment_replay').val();
-            el = document.createElement('li');
-            el.className = "box_reply row";
-            el.innerHTML =
-                    '<div class=\"avatar_comment col-md-1\">'+
-                    '<img src=\"https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg\" alt=\"avatar\"/>'+
-                    '</div>'+
-                    '<div class=\"result_comment col-md-11\">'+
-                    '<h4>Anonimous</h4>'+
-                    '<p>'+ comment_replay +'</p>'+
-                    '<div class=\"tools_comment\">'+
-                    {{--  '<a class=\"like\" href=\"javascript:void(0):\">Like</a><span aria-hidden=\"true\"> · </span>'+  --}}
-                    {{--  '<i class="\far fa-thumbs-up\"></i> <span class=\"count\">0</span>'+  --}}
-                    {{--  '<span aria-hidden=\"true\"> · </span>'+  --}}
-                    '<a class=\"replay\" href=\"javascript:void(0):\">Reply</a><span aria-hidden=\"true\"> · </span>'+
-                        '<span>1m</span>'+
-                    '</div>'+
-                    '<ul class="child_replay"></ul>'+
-                    '</div>';
-                $current.closest('li').find('.child_replay').prepend(el);
-                $('.comment_replay').val('');
-                cancel_reply();
+            let newCmt = $('#comment_replay').val();
+            if(newCmt === '' || newCmt == null){
+                alert('Bạn không thể gửi comment mà không nhập nội dung!');
+                return false;
+            }
+            $.ajax({
+                type: "GET",
+                url: "{{ route('comment.test') }}",
+                data: {
+                    newCmt: newCmt,
+                    ex_id: ex_id,
+                    parent_id:parent_comment,
+                    _token: "{{ csrf_token() }}"
+                    },
+                success: function (result) {
+                    $('#comment_replay').val(null);
+                    $('#comments').html(result);
+                },
+                error: function (result) {
+                }
+            });
         }
 
         function cancel_reply(){

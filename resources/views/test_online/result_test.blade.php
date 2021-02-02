@@ -90,103 +90,41 @@
                     <div class="col-md-6 text-left">
                       <span class="count_comment">264235 Comments</span>
                     </div>
-                    <div class="col-md-6 text-right">
+                    {{-- <div class="col-md-6 text-right">
                       <span class="sort_title">Sort by</span>
                       <select class="sort_by">
                         <option>Top</option>
                         <option>Newest</option>
                         <option>Oldest</option>
                       </select>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
+
             <div class="body_comment">
                 <div class="row">
                     <div class="avatar_comment col-md-1">
-                      <img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>
+                      <img src="{{ !empty(\Auth::user()->avatar) ? asset(\Auth::user()->avatar) : 'https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg' }}" alt="avatar"/>
                     </div>
                     <div class="box_comment col-md-11">
-                      <textarea class="commentar" placeholder="Add a comment..."></textarea>
+                      <textarea class="commentar" id="new_comment" placeholder="Add a comment..."></textarea>
                       <div class="box_post">
-                        <div class="pull-left">
+                        {{-- <div class="pull-left">
                           <input type="checkbox" id="post_fb"/>
                           <label for="post_fb">Also post on Facebook</label>
-                        </div>
+                        </div> --}}
                         <div class="pull-right">
-                          <span>
+                          {{-- <span>
                             <img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar" />
                             <i class="fa fa-caret-down"></i>
-                          </span>
-                          <button onclick="submit_comment()" type="button" value="1">Post</button>
+                          </span> --}}
+                          <button type="button" id="post_comment">Bình luận</button>
                         </div>
                       </div>
                     </div>
                 </div>
-                <div class="row">
-                    <ul id="list_comment" class="col-md-12">
-                        <!-- Start List Comment 1 -->
-                        <li class="box_result row">
-                            <div class="avatar_comment col-md-1">
-                                <img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>
-                            </div>
-                            <div class="result_comment col-md-11">
-                                <h4>Nath Ryuzaki</h4>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.</p>
-                                <div class="tools_comment">
-                                    <a class="like" href="javascript:void(0):">Like</a>
-                                    <span aria-hidden="true"> · </span>
-                                    <a class="replay" href="javascript:void(0):">Reply</a>
-                                    <span aria-hidden="true"> · </span>
-                                    <i class="far fa-thumbs-up"></i> <span class="count">1</span>
-                                    <span aria-hidden="true"> · </span>
-                                    <span>26m</span>
-                                </div>
-                                <ul class="child_replay">
-                                    <li class="box_reply row">
-                                        <div class="avatar_comment col-md-1">
-                                            <img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>
-                                        </div>
-                                         <div class="result_comment col-md-11">
-                                            <h4>Sugito</h4>
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.</p>
-                                            <div class="tools_comment">
-                                                <a class="like" href="javascript:void(0):">Like</a>
-                                                <span aria-hidden="true"> · </span>
-                                                <a class="replay" href="javascript:void(0):">Reply</a>
-                                                <span aria-hidden="true"> · </span>
-                                                <i class="far fa-thumbs-up"></i> <span class="count">1</span>
-                                                <span aria-hidden="true"> · </span>
-                                                <span>26m</span>
-                                            </div>
-                                            <ul class="child_replay"></ul>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
+                <div class="row" id="comments">
 
-                        <!-- Start List Comment 2 -->
-                        <li class="box_result row">
-                            <div class="avatar_comment col-md-1">
-                                <img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>
-                            </div>
-                            <div class="result_comment col-md-11">
-                                <h4>Gung Wah</h4>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.</p>
-                                <div class="tools_comment">
-                                    <a class="like" href="javascript:void(0):">Like</a>
-                                    <span aria-hidden="true"> · </span>
-                                    <a class="replay" href="javascript:void(0):">Reply</a>
-                                    <span aria-hidden="true"> · </span>
-                                    <i class="far fa-thumbs-up"></i> <span class="count">1</span>
-                                    <span aria-hidden="true"> · </span>
-                                    <span>26m</span>
-                                </div>
-                                <ul class="child_replay"></ul>
-                            </div>
-                        </li>
-                    </ul>
-                    <button class="show_more" type="button">Load 10 more comments</button>
                 </div>
             </div>
         </div>
@@ -210,6 +148,122 @@
         $("#exampleModal").modal()
     });
 
+</script>
+<script>
+    $('.select_answer').on('click', function(e){
+        let number = $(this).data('number');
+        $('.number_' + number).addClass('active');
+    });
+
+    $('.submit').on('click', function(e){
+        let numItems = $('.active').length;
+        $("#exampleModal").modal()
+    });
+
+    var ex_id = {{ $detail->id }};
+    $( document ).ready(function() {
+        loadComment();
+    });
+
+    function loadComment(){
+        $.ajax({
+            type: "GET",
+            url: "{{ route('comment.test') }}",
+            data: {
+                ex_id: ex_id,
+                _token: "{{ csrf_token() }}"
+                },
+            success: function (result) {
+                $('#comments').html(result);
+            },
+            error: function (result) {
+            }
+        });
+    }
+
+    $('#post_comment').on('click', function(e){
+        let newCmt = $('#new_comment').val();
+        if(newCmt === '' || newCmt == null){
+            alert('Bạn không thể gửi comment mà không nhập nội dung!');
+            return false;
+        }
+        $.ajax({
+            type: "GET",
+            url: "{{ route('comment.test') }}",
+            data: {
+                newCmt: newCmt,
+                ex_id: ex_id,
+                _token: "{{ csrf_token() }}"
+                },
+            success: function (result) {
+                $('#new_comment').val(null);
+                $('#comments').html(result);
+            },
+            error: function (result) {
+            }
+        });
+    });
+
+</script>
+
+<script>
+    var parent_comment = null;
+    $(document).ready(function() {
+
+        $('body').on('click', '.replay', function (e) {
+            cancel_reply();
+            $current = $(this);
+            parent_comment = $(this).data('parentid');
+            el = document.createElement('li');
+            el.className = "box_reply row";
+            el.innerHTML =
+                '<div class=\"col-md-12 reply_comment\">'+
+                    '<div class=\"row\">'+
+                        '<div class=\"avatar_comment col-md-1\">'+
+                        '<img src=\"https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg\" alt=\"avatar\"/>'+
+                        '</div>'+
+                        '<div class=\"box_comment col-md-10\">'+
+                        '<textarea class=\"comment_replay\" id=\"comment_replay\" placeholder=\"Add a comment...\"></textarea>'+
+                        '<div class=\"box_post\">'+
+                            '<div class=\"pull-right\">'+
+                            '<button class=\"cancel\" onclick=\"cancel_reply()\" type=\"button\">Cancel</button>'+
+                            '<button onclick=\"submit_reply()\" type=\"button\" value=\"1\">Reply</button>'+
+                            '</div>'+
+                        '</div>'+
+                        '</div>'+
+                    '</div>'+
+                '</div>';
+            $current.closest('li').find('.child_replay').prepend(el);
+        });
+    });
+
+    function submit_reply(){
+        let newCmt = $('#comment_replay').val();
+        if(newCmt === '' || newCmt == null){
+            alert('Bạn không thể gửi comment mà không nhập nội dung!');
+            return false;
+        }
+        $.ajax({
+            type: "GET",
+            url: "{{ route('comment.test') }}",
+            data: {
+                newCmt: newCmt,
+                ex_id: ex_id,
+                parent_id:parent_comment,
+                _token: "{{ csrf_token() }}"
+                },
+            success: function (result) {
+                $('#comment_replay').val(null);
+                $('#comments').html(result);
+            },
+            error: function (result) {
+            }
+        });
+    }
+
+    function cancel_reply(){
+        $('.reply_comment').remove();
+    }
 </script>
 @endpush
 

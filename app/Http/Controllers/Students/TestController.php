@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Students;
 
 use App\Http\Controllers\Controller;
+use App\Models\Comments;
 use App\Models\Subject;
 use App\Models\Tests;
 use App\Models\UserAnswer;
@@ -51,6 +52,22 @@ class TestController extends Controller
         }catch(Exception $e){
             return back()
             ->with(['alert-type' => 'error', 'message' => 'Nộp bài thi thất bại']);
+        }
+    }
+
+
+
+    public function loadCommentTest(Request $request, Comments $comments)
+    {
+        if($request->ajax()){
+            if(!empty($request->newCmt)){
+                $comments->saveComment($request, 1);
+            }
+            //get comment
+            $list = $comments->getCommentByTest($request->ex_id);
+            return view('exersire.comments')->with([
+                'listComment'=>$list
+            ]);
         }
     }
 }

@@ -65,6 +65,17 @@
 
           @endif
     </script>
+
+    <script>
+            $('body').on('keyup','#search_input',function(e){
+                if (e.key === 'Enter' || e.keyCode === 13) {
+                    var search = $(this).val();
+                    var url = '{{ route('search.code') }}';
+                    url += '?search='+search;
+                    location.href = url;
+                }
+            });
+    </script>
     @stack('scripts')
 </body>
 </html>

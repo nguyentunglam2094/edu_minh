@@ -24,7 +24,15 @@ class Comments extends Model
      */
     public function getCommentByExer($exer_id)
     {
-        return $this->with(['parentComment.user', 'user'])->where('exercise_id', $exer_id)
+        return $this->with(['parentComment.user', 'user'])
+        ->where('parent_id', 0)->where('exercise_id', $exer_id)
+        ->orderBy('id','desc')->get();
+    }
+
+    public function getCommentByTest($exer_id)
+    {
+        return $this->with(['parentComment.user', 'user'])
+        ->where('parent_id', 0)->where('object_id', $exer_id)
         ->orderBy('id','desc')->get();
     }
 
@@ -39,13 +47,23 @@ class Comments extends Model
         if(!empty($request->parent_id)){
             $parent_id = $request->parent_id;
         }
-        $data = [
-            'user_id'=>!empty($request->user()) ? $request->user()->id : 0,
-            'object_id'=>0,
-            'exercise_id'=>$request->ex_id,
-            'comment'=>$request->newCmt,
-            'parent_id'=>$parent_id,
-        ];
+        if($type == 0){
+            $data = [
+                'user_id'=>!empty($request->user()) ? $request->user()->id : 0,
+                'object_id'=>0,
+                'exercise_id'=>$request->ex_id,
+                'comment'=>$request->newCmt,
+                'parent_id'=>$parent_id,
+            ];
+        }else{
+            $data = [
+                'user_id'=>!empty($request->user()) ? $request->user()->id : 0,
+                'object_id'=>$request->ex_id,
+                'exercise_id'=>0,
+                'comment'=>$request->newCmt,
+                'parent_id'=>$parent_id,
+            ];
+        }
         return $this->create($data);
     }
 }

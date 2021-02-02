@@ -23,4 +23,8 @@ class HomeController extends Controller
         ]);
     }
 
+    public function searchCode(Request $request)
+    {
+        dd($request->all());
+    }
 }

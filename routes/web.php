@@ -33,6 +33,7 @@ Route::group(['namespace' => 'Students'], function () {
     //cần login, thi online cũng cần đăng nhập
     Route::group(['middleware' => ['logged']], function () {
         route::get('/comment-bai-tap', 'ExerController@loadCommentEx')->name('comment.exersire');
+        route::get('/comment-bai-thi', 'TestController@loadCommentTest')->name('comment.test');
         route::get('/logout', 'AuthController@logout')->name('logout');
         Route::group(['prefix' => 'lam-bai-thi-online'], function () {
             route::get('/{slug}', 'TestController@indexTest')->name('index.test.online');
@@ -40,7 +41,7 @@ Route::group(['namespace' => 'Students'], function () {
             route::post('/nop-bai', 'TestController@endTest')->name('end.test');
             route::get('/ket-qua/{id}', 'TestController@resultTest')->name('result.test');
         });
-
+        route::get('tim-kiem', 'HomeController@searchCode')->name('search.code');
         route::get('cap-nhap-thong-tin-ca-nhan', 'AuthController@updateProfile')->name('update.profile.view');
         route::post('update-profile', 'AuthController@update')->name('update.profile');
         route::get('doi-mat-khau','AuthController@viewChangePassword')->name('change.pass.view');

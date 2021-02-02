@@ -11,7 +11,7 @@
             <div class="tools_comment">
                 {{--  <a class="like" href="javascript:void(0):">Like</a>
                 <span aria-hidden="true"> · </span>  --}}
-                <a class="replay" href="javascript:void(0);">Reply</a>
+                <a class="replay" data-parentid="{{ $comment->id }}" href="javascript:void(0);">Reply</a>
                 <span aria-hidden="true"> · </span>
                 {{-- <i class="far fa-thumbs-up"></i> <span class="count">1</span>
                 <span aria-hidden="true"> · </span> --}}

@@ -14,7 +14,7 @@
                         <div class="icon_search">
                             <i class="fas fa-search"></i>
                         </div>
-                        <input type="text" class="input_search form-control" placeholder="Searching..." name="search">
+                        <input type="text" id="search_input" class="input_search form-control" placeholder="Searching..." name="search">
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 d-flex justify-content-center align-items-center">
