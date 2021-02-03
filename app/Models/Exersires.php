@@ -30,6 +30,16 @@ class Exersires extends Model
         return $this->with('typeExercire')->orderBy('id','desc')->get();
     }
 
+
+    public function searchCodeExer($code = null)
+    {
+        $data = $this->with('typeExercire');
+        if(!empty($code)){
+            $data = $data->where('code', 'like', '%'.$code.'%');
+        }
+        return $data->orderBy('id','desc')->get();
+    }
+
     /**
      * danh sách bài tập tương tự
      */

@@ -16,26 +16,24 @@
                 <a href="#" class="review_all">Xem tất cả <i class="fas fa-angle-right"></i></a>
             </div> -->
         </div>
-        {{-- <div class="list_subject">
+        <div class="list_subject">
             <div class="row">
-                @foreach ($tests as $test)
+                @foreach ($listEx as $ex)
                 <div class="col-lg-3 col-md-3 mb-4">
                     <div class="item_subject">
-                        <a href="{{ route('test.online', $test->id) }}">
+                        <a href="{{ route('detail.exersire', $ex->id) }}">
                             <div class="img_subject">
-                                <img src="" alt="" class="img-fluid">
+                                <img src="{{ !empty($ex->image_question) ? asset($ex->image_question) : null }}" alt="" class="img-fluid">
                             </div>
                             <div class="infor_subject">
-                                <h4>{{ $test->title }}</h4>
-                                <div class="name_subject"><span>Số lượng câu hỏi</span>: {{ $test->question_number }}<span></span></div>
-                                <div class="name_subject"><span>Thời gian làm bài</span>: {{ $test->min }}<span></span></div>
+                                <h4>{{ $ex->code . '. ' . $ex->question }}</h4>
                             </div>
                         </a>
                     </div>
                 </div>
                 @endforeach
             </div>
-            <nav aria-label="Page navigation example">
+            {{-- <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">
                   <li class="page-item">
                     @if ($tests->currentPage() == 1)
@@ -68,8 +66,8 @@
 
                   </li>
                 </ul>
-              </nav>
-        </div> --}}
+              </nav> --}}
+        </div>
 
     </div>
 </section>
