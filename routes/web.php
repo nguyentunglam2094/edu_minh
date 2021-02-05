@@ -46,6 +46,8 @@ Route::group(['namespace' => 'Students'], function () {
         route::post('update-profile', 'AuthController@update')->name('update.profile');
         route::get('doi-mat-khau','AuthController@viewChangePassword')->name('change.pass.view');
         route::post('change-password', 'AuthController@changePassword')->name('change.password');
+
+        route::get('lich-su-de-thi', 'StudentController@historyTest')->name('history.test');
     });
 
 });

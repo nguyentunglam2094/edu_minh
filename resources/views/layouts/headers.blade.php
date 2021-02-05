@@ -37,6 +37,7 @@
                             </a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="{{ route('update.profile.view') }}">Trang cá nhân</a>
+                                <a class="dropdown-item" href="{{ route('history.test') }}">Xem lại điểm thi online</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('logout') }}">Đăng xuất</a>
                             </div>

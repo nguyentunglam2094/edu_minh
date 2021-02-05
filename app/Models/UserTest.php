@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class UserTest extends Model
@@ -17,6 +18,16 @@ class UserTest extends Model
     public function testAnswer()
     {
         return $this->hasMany(TestAnswers::class, 'test_id', 'test_id');
+    }
+
+    public function test()
+    {
+        return $this->hasOne(Tests::class, 'id' ,'test_id');
+    }
+
+    public function getByUserId($user_id)
+    {
+        return $this->with('test')->where('user_id', $user_id)->orderBy('id', 'desc')->get();
     }
 
     public function confirmTest($request)
@@ -39,7 +50,7 @@ class UserTest extends Model
                 'test_id'=>$test_id,
                 'answer_corredt'=>0,
                 'result'=>0,
-                'date'=>now()
+                'date'=>Carbon::now('Asia/Ho_Chi_Minh')
             ];
             $createTest = $this->create($data);
             $user_test_id = $createTest->id;
@@ -77,4 +88,6 @@ class UserTest extends Model
     {
         return $this->with(['userAnser'])->where($this->primaryKey, $id)->first();
     }
+
+
 }

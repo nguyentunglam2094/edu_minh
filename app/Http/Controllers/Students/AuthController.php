@@ -71,7 +71,7 @@ class AuthController extends Controller
     {
         $urlPrevious = url()->previous();
         $urlBase = url()->to('/');
-        if(($urlPrevious != $urlBase . '/dang-nhap') && (substr($urlPrevious, 0, strlen($urlBase)) === $urlBase)) {
+        if(($urlPrevious != $urlBase . '/dang-nhap') && ($urlPrevious != $urlBase . '/dang-ky-tai-khoan') && (substr($urlPrevious, 0, strlen($urlBase)) === $urlBase)) {
             session()->put('url.intended', $urlPrevious);
         }
         return view('auth_login.login');

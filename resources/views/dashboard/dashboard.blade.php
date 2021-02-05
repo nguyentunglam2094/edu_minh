@@ -5,19 +5,23 @@
 @endsection
 @section('content')
 <section class="nd-banner">
+    <?php
+        $countBanner = $listBanner->count();
+    ?>
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
-          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            @for ($i = 0; $i < $countBanner; $i++)
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" {{ $i == 0 ? 'class="active"' : '' }}></li>
+            @endfor
+
         </ol>
         <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img class="d-block w-100" src="{{ asset('/webstudent/images/anh-bia-facebook-dep-124.png') }}" alt="First slide">
-          </div>
-          <div class="carousel-item">
-            <img class="d-block w-100" src="{{ asset('/webstudent/images/anh-bia-buon-1.jpg') }}" alt="Second slide">
-          </div>
+            @foreach ($listBanner as $key=>$item)
+                <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                    <img class="d-block w-100" src="{{ asset($item->image) }}" alt="slide">
+                </div>
+            @endforeach
+
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -70,7 +74,7 @@
             <div class="row">
                 <div class="col-lg-5 col-md-5 d-flex align-items-center">
                     <div class="introduce_logo text-center">
-                        <img src="{{ asset('webstudent/images/logo448x152.png') }}" alt="" class="img-fluid">
+                        <img src="{{ asset('images/logo-01.png') }}" alt="" class="img-fluid">
                     </div>
                 </div>
                 <div class="col-lg-7 col-md-7">
