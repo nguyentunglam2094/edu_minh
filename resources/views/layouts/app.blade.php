@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{ asset('webstudent/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('webstudent/css/custom.css') }}">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
-    <link rel="shortcut icon" href="{{ asset('webstudent/images/logo448x152.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('images/Artboard1.png') }}" type="image/x-icon">
     @yield('css')
 </head>
 <body>

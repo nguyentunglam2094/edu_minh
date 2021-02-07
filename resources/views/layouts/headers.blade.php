@@ -54,7 +54,7 @@
         <div class="nav-wrapper">
             <nav class="navbar">
                 <a href="{{ route('home.page') }}" class="mobile_logo">
-                    <img src="{{ asset('webstudent/images/logo448x152.png') }}" alt="">
+                    <img src="{{ asset('images/Artboard1.png') }}" alt="">
                 </a>
 
                 <div class="open-menu" id="open-menu">
@@ -64,7 +64,7 @@
                 <ul class="nav no-search" id="menu-mobile">
                     <div class="logo_mobile">
                         <a href="{{ route('home.page') }}">
-                            <img src="{{ asset('webstudent/images/logo448x152.png') }}" alt="">
+                            <img src="{{ asset('images/Artboard1.png') }}" alt="">
                         </a>
                     </div>
                     <div class="close" id="close-sidebar">
