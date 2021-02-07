@@ -69,27 +69,7 @@
 </section>
 <section class="introduce">
     <div class="container">
-        <div class="box_introduce">
-            <div class="bg_intro"></div>
-            <div class="row">
-                <div class="col-lg-5 col-md-5 d-flex align-items-center">
-                    <div class="introduce_logo text-center">
-                        <img src="{{ asset('images/logo-01.png') }}" alt="" class="img-fluid">
-                    </div>
-                </div>
-                <div class="col-lg-7 col-md-7">
-                    <div class="infor_web">
-                        <h2>Giới thiệu chung</h2>
-                        <div class="description">
-                            <ul>
-                                <li>Được thành lập từ năm 2013, Tuyensinh247.com hoạt động sứ mệnh "Giúp các bạn học sinh trên khắp mọi miền Việt Nam có môi trường học bình đẳng, học với giáo viên giỏi hàng đầu Việt Nam"</li>
-                                <li>Trong nhiều năm qua Tuyensinh247.com đã không ngừng khẳng định vị trí và chất lượng trong lĩnh vực đào tạo trực tuyến cho học sinh cấp 1, 2, 3 khi nhận được sự tin tưởng của hơn 1.000.000 học sinh theo học, số lượng học sinh đạt HSG, Thủ khoa, Á Khoa đại học không ngừng tăng qua từng năm.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <img src="{{ asset('/images/Asset5.png') }}" alt="" class="image-dashboard">
     </div>
 </section>
 <section class="dn-subject">

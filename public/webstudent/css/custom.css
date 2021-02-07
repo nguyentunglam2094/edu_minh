@@ -30,6 +30,20 @@
     color: #FFFFFF!important;
 }
 
+
+@media screen and (min-width: 320px) {
+    .image-dashboard {
+        margin-left: -13%;
+        width: 400px;
+    }
+}
+@media screen and (min-width: 760px) {
+    .image-dashboard {
+        margin-left: -18%;
+        width: 1400px;
+    }
+}
+
 .active_selection{
     background: #C6EEEE!important;
 }

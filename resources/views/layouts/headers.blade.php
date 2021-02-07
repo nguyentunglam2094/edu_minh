@@ -5,7 +5,7 @@
                 <div class="col-lg-3 col-md-3">
                     <div class="logo">
                         <a href="{{ route('home.page') }}">
-                            <img src="{{ asset('webstudent/images/logo448x152.png') }}" alt="" class="img-fluid">
+                            <img src="{{ asset('images/Artboard1.png') }}" alt="" class="img-fluid">
                         </a>
                     </div>
                 </div>
