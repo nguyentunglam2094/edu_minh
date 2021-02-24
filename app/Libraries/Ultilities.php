@@ -70,7 +70,7 @@ class Ultilities
         }
         //input
         if ($type == 0) {
-            $test =  Carbon::createFromFormat('d/m/Y', $date)->format('m/d/Y');
+            $test =  Carbon::createFromFormat('m/d/Y', $date)->format('m/d/Y');
             return date("Y/m/d", strtotime($test));
         }
         if ($type == 2) {

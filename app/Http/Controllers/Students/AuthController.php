@@ -24,8 +24,14 @@ class AuthController extends Controller
             'password' => $request->get('password'),
         );
         if(!Auth::attempt($admin_login_data)){
-            return back()->with('error',__('web.login_error'));
+            return back()->with('error','Email hoặc mật khẩu không đúng');
         }
+
+        if($request->user()->active == Users::INACTIVE){
+            Auth::logout();
+            return back()->with('error','Tài khoản của bạn chưa được kích hoạt');
+        }
+
         if(!empty(session()->get('url.intended'))){
             return redirect()->intended(session()->get('url.intended'));
         }
@@ -45,11 +51,12 @@ class AuthController extends Controller
         $request->validate([
             'email'=>'required|email|unique:users,email',
             'name'=>'required|string|max:100',
+            'dob'=>'required|date',
             'phone' => 'nullable|sometimes|max:15|min:10|regex:/^([0-9\s\-\+\(\)]*)$/',
             'password' => 'required|min:6|confirmed'
         ]);
         try{
-            $users->register($request);
+            $user = $users->register($request);
             return redirect()->route('view.login')
             ->with(['alert-type' => 'success', 'message' => 'Đăng ký tài khoản thành công']);
         }catch(Exception $ex){

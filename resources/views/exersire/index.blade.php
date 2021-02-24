@@ -7,10 +7,11 @@
 
 <section class="detail_teacher detail_subject">
     <div class="container">
-        <h4>#{{ $detail->code .'. ' .$detail->question }}</h4>
+        <h4>Mã #{{ $detail->code}}</h4>
         <div class="detail_exercise">
             <div class="col-lg-12 col-md-12">
-                <img src="{{ asset($detail->image_question) }}" alt="" class="img-fluid">
+                {{-- <img src="{{ asset($detail->image_question) }}" alt="" class="img-fluid"> --}}
+                {!! $detail->question !!}
             </div>
         </div>
     </div>
@@ -96,6 +97,10 @@
 
 @endsection
 @push('scripts')
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
 <script>
     var ex_id = {{ $detail->id }};
     $( document ).ready(function() {

@@ -40,6 +40,11 @@
                         @endif
                     </div>
                 </div>
+
+                @if ($message = Session::get('error'))
+                    <span class="invalid">{{ $message }}</span>
+                @endif
+
               </div>
               <div class="modal-footer justify-content-center">
                 <button type="submit" class="btn btn-primary form-control">Đăng nhập</button>

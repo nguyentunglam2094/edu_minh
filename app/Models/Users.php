@@ -6,6 +6,7 @@ use App\Libraries\Ultilities;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+
 use Illuminate\Notifications\Notifiable;
 use File;
 class Users extends Authenticatable
@@ -31,6 +32,9 @@ class Users extends Authenticatable
         'password', 'remember_token',
     ];
 
+    const ACTIVE = 1;
+    const INACTIVE = 0;
+
     /**
      * The attributes that should be cast to native types.
      *
@@ -44,7 +48,7 @@ class Users extends Authenticatable
     {
         if(!empty($key)){
             $path = public_path($key);
-            $isExists = File::exists($path);
+            $isExists = \File::exists($path);
             if(!$isExists){
                 return null;
             }
@@ -58,6 +62,7 @@ class Users extends Authenticatable
             'email'=>Ultilities::clearXSS($request->email),
             'name'=>Ultilities::clearXSS($request->name),
             'phone'=>Ultilities::clearXSS($request->phone),
+            'dob'=>Ultilities::formatDate($request->dob),
             'password'=>bcrypt(Ultilities::clearXSS($request->password)),
         ];
         return $this->create($data);
