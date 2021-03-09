@@ -7,6 +7,7 @@ use App\Models\Banners;
 use App\Models\ExerciseType;
 use App\Models\Exersires;
 use App\Models\Teachers;
+use App\Models\Themes;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -15,10 +16,10 @@ class HomeController extends Controller
     /**
      *  view home page
      */
-    public function index(Teachers $teachers, ExerciseType $exerciseType, Banners $banners)
+    public function index(Teachers $teachers, ExerciseType $exerciseType, Banners $banners, Themes $themes)
     {
         $listTeacher = $teachers->getTeachers();
-        $listEx = $exerciseType->getTypeEx();
+        $listEx = $themes->getListTheme();
         $listBanner = $banners->orderBy('id','desc')->get();
 
         return view('dashboard.dashboard')->with([

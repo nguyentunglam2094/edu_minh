@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class SubjectController extends Controller
 {
     //
-    public function detailSubject(ExerciseType $exerciseType, Exersires $exersires, $subject_id)
+    public function detailSubject(ExerciseType $exerciseType, Exersires $exersires,$subject_id)
     {
         $detailType = $exerciseType->detail($subject_id);
         if(empty($detailType)){

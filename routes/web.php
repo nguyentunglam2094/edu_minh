@@ -23,15 +23,19 @@ Route::group(['namespace' => 'Students'], function () {
     route::get('/', 'HomeController@index')->name('home.page');
     Route::group(['prefix' => 'dang-bai-tap'], function () {
         route::get('/', 'SubjectController@index')->name('list.subject');
+
+        //chủ đề
         route::get('mon-hoc/{subject}/{class}', 'SubjectController@indexSubject')->name('list.subject.class');
+
         route::get('/{id}', 'SubjectController@detailSubject')->name('detail.subject');
-    });
-    Route::group(['prefix' => 'bai-tap'], function () {
-        route::get('/chi-tiet/{id}', 'ExerController@detailExer')->name('detail.exersire');
     });
 
     //cần login, thi online cũng cần đăng nhập
     Route::group(['middleware' => ['logged']], function () {
+        Route::group(['prefix' => 'bai-tap'], function () {
+            route::get('/chi-tiet/{id}', 'ExerController@detailExer')->name('detail.exersire');
+        });
+
         route::get('/comment-bai-tap', 'ExerController@loadCommentEx')->name('comment.exersire');
         route::get('/comment-bai-thi', 'TestController@loadCommentTest')->name('comment.test');
         route::get('/logout', 'AuthController@logout')->name('logout');
@@ -48,6 +52,11 @@ Route::group(['namespace' => 'Students'], function () {
         route::post('change-password', 'AuthController@changePassword')->name('change.password');
 
         route::get('lich-su-de-thi', 'StudentController@historyTest')->name('history.test');
+
+        Route::prefix('chu-de')->group(function () {
+            route::get('/{code}', 'ThemeController@detailTheme')->name('index.themes');
+            route::get('/dang-bai-tap/{code}','ThemeController@indexType')->name('index.type.ex');
+        });
     });
 
 });

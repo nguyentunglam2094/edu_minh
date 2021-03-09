@@ -13,6 +13,10 @@ class ExerciseType extends Model
     {
         return $this->hasOne(Subject::class, 'id', 'subject_id');
     }
+    public function exercise()
+    {
+        return $this->hasMany(Exersires::class, 'exercises_type_id', 'id');
+    }
 
     public function getTypeEx($paginate = 0, $class = null, $subject = null)
     {
@@ -32,6 +36,16 @@ class ExerciseType extends Model
     public function detail($id)
     {
         return $this->with(['subject'])->where($this->primaryKey, $id)->first();
+    }
+
+    public function detailByCode($code)
+    {
+        return $this->with(['subject', 'exercise'])->where('code', $code)->first();
+    }
+
+    public function getOtherType($detail)
+    {
+        return $this->where($this->primaryKey, '!=', $detail->id)->where('theme_id', $detail->theme_id)->get();
     }
 
     /**

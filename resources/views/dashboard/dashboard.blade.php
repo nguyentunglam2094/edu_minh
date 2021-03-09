@@ -76,7 +76,7 @@
     <div class="container">
         <div class="row mb-2">
             <div class="col-lg-10 col-md-10">
-                <h2>Các dạng bài tập</h2>
+                <h2>Các Chủ Đề</h2>
             </div>
             <div class="col-lg-2 col-md-2 d-flex align-items-center justify-content-end">
                 <a href="{{ route('list.subject') }}" class="review_all">Xem tất cả <i class="fas fa-angle-right"></i></a>
@@ -87,13 +87,13 @@
                 @foreach ($listEx as $type)
                 <div class="col-lg-3 col-md-3 mb-4">
                     <div class="item_subject">
-                        <a href="{{ route('detail.subject', $type->id) }}">
+                        <a href="{{ route('index.themes', $type->id) }}">
                             <div class="img_subject">
                                 <img src="{{ !empty($type->image) ? asset($type->image) : asset('images/no-image.png') }}" alt="" class="img-fluid">
                             </div>
                             <div class="infor_subject">
                                 <h4>{{ $type->title }}</h4>
-                                <div class="name_subject"><span>Môn</span>: <span>{{ $type->subject->title }}</span></div>
+                                <div class="name_subject"><span>Môn</span>: <span>{{ !empty($type->subject) ? $type->subject->title : '' }}</span></div>
                             </div>
                         </a>
                     </div>
