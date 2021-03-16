@@ -19,15 +19,44 @@
                 <p>Danh sách câu hỏi</p>
                 <div class="row">
                     @foreach ($detail->exercise as $val)
-                        <div class="col-lg-1">{{ $val->code }}</div>
+                        <div class="col-lg-1 show_popup" data-imgquestion="{{ asset($val->image_question) }}"
+                            data-imganswer="{{ asset($val->image_answer) }}">No.{{ $val->code }}</div>
                     @endforeach
                 </div>
                 @else
-                <p>Chưa có bài tập trong dạng</p>
+                    <p>Chưa có bài tập trong dạng</p>
                 @endif
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" id="code"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-12">
+                        <p>Câu hỏi</p>
+                        <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg" style="width: 100%;" id="question_img">
+                    </div>
+                    <div class="col-12">
+                        <p>Đáp án</p>
+                        <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg" style="width: 100%;" id="answer_img">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </section>
 <section class="dn-infor--teacher">
     <div class="container">
@@ -65,7 +94,15 @@
 @endsection
 @push('scripts')
 <script>
+    $('.show_popup').on('click', function(){
+        let urlQ = $(this).data('imgquestion');
+        let urlA = $(this).data('imganswer');
+        document.getElementById("question_img").src = urlQ;
+        document.getElementById("answer_img").src = urlA;
+        $("#exampleModal").modal();
+    });
 </script>
+
 @endpush
 
 
