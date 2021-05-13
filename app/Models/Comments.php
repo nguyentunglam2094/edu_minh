@@ -29,6 +29,11 @@ class Comments extends Model
         ->orderBy('id','desc')->get();
     }
 
+    public function countComment($exer_id)
+    {
+        return $this->where('exercise_id', $exer_id)->count();
+    }
+
     public function getCommentByTest($exer_id)
     {
         return $this->with(['parentComment.user', 'user'])

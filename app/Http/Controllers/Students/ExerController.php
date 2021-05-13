@@ -23,16 +23,30 @@ class ExerController extends Controller
         ]);
     }
 
-    public function loadCommentEx(Request $request, Comments $comments)
+    public function loadCommentEx(Request $request, Comments $comments, Exersires $exersires)
     {
         if($request->ajax()){
             if(!empty($request->newCmt)){
                 $comments->saveComment($request);
+                $list = $comments->getCommentByExer($request->ex_id);
+                return view('exersire.comments')->with([
+                    'listComment'=>$list
+                ]);
             }
             //get comment
-            $list = $comments->getCommentByExer($request->ex_id);
-            return view('exersire.comments')->with([
-                'listComment'=>$list
+            if(!empty($request->type)){
+                $detailEx = $exersires->getDetailByCode($request->ex_id);
+            }else{
+                $detailEx = $exersires->getDetailById($request->ex_id);
+            }
+
+            $count = !empty($detailEx) ? $comments->countComment($detailEx->id) : null;
+            $list = !empty($detailEx) ? $comments->getCommentByExer($detailEx->id) : null;
+
+            return view('exersire.detail')->with([
+                'listComment'=>$list,
+                'detail'=>$detailEx,
+                'count'=>$count,
             ]);
         }
     }

@@ -19,6 +19,16 @@
         <header>
             @include('layouts.headers')
             @yield('content')
+
+            <!-- Large modal -->
+            <div class="modal fade bd-example-modal-lg" id="detailEx" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                </div>
+            </div>
+            </div>
+
             @include('layouts.footers')
         </header>
     </div>
@@ -33,6 +43,24 @@
 
     <script src="{{ asset('webstudent/js/index.js') }}"></script>
     <script>
+
+        function loadComment(ex_id, type = null){
+            $.ajax({
+                type: "GET",
+                url: "{{ route('comment.exersire') }}",
+                data: {
+                    ex_id: ex_id,
+                    type: type,
+                    _token: "{{ csrf_token() }}"
+                    },
+                success: function (result) {
+                    $('.modal-content').html(result);
+                },
+                error: function (result) {
+                }
+            });
+        }
+
         function convertMsg(msg) {
             msg = msg.toLowerCase();
             msg = msg.charAt(0).toUpperCase() + msg.slice(1);
@@ -67,14 +95,101 @@
     </script>
 
     <script>
-            $('body').on('keyup','#search_input',function(e){
-                if (e.key === 'Enter' || e.keyCode === 13) {
-                    var search = $(this).val();
-                    var url = '{{ route('search.code') }}';
-                    url += '?search='+search;
-                    location.href = url;
-                }
-            });
+    $('body').on('keyup','#search_input',function(e){
+        if (e.key === 'Enter' || e.keyCode === 13) {
+            ex_id = $(this).val();
+            type = 1;
+            $('#detailEx').modal('show');
+        }
+    });
+
+    var ex_id;
+    var parent_comment = null;
+    var type = null;
+
+    $('#detailEx').on('shown.bs.modal', function (e) {
+        // do something...
+        loadComment(ex_id, type);
+    });
+
+    $('body').on('click', '#post_comment', function(e){
+        let newCmt = $('#new_comment').val();
+
+        if(newCmt === '' || newCmt == null){
+            alert('Bạn không thể gửi comment mà không nhập nội dung!');
+            return false;
+        }
+        $.ajax({
+            type: "GET",
+            url: "{{ route('comment.exersire') }}",
+            data: {
+                newCmt: newCmt,
+                ex_id: ex_id,
+                _token: "{{ csrf_token() }}"
+                },
+            success: function (result) {
+                $('#new_comment').val(null);
+                $('#comments').html(result);
+            },
+            error: function (result) {
+            }
+        });
+    });
+
+    $('body').on('click', '.replay', function (e) {
+        cancel_reply();
+        $current = $(this);
+        parent_comment = $(this).data('parentid');
+        el = document.createElement('li');
+        el.className = "box_reply row";
+        el.innerHTML =
+            '<div class=\"col-md-12 reply_comment\">'+
+                '<div class=\"row\">'+
+                    '<div class=\"avatar_comment col-md-1\">'+
+                    '<img src=\"https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg\" alt=\"avatar\"/>'+
+                    '</div>'+
+                    '<div class=\"box_comment col-md-10\">'+
+                    '<textarea class=\"comment_replay\" placeholder=\"Add a comment...\"></textarea>'+
+                    '<div class=\"box_post\">'+
+                        '<div class=\"pull-right\">'+
+                        '<button class=\"cancel\" onclick=\"cancel_reply()\" type=\"button\">Cancel</button>'+
+                        '<button onclick=\"submit_reply()\" type=\"button\" value=\"1\">Reply</button>'+
+                        '</div>'+
+                    '</div>'+
+                    '</div>'+
+                '</div>'+
+            '</div>';
+        $current.closest('li').find('.child_replay_'+parent_comment).prepend(el);
+    });
+
+    function submit_reply(){
+        let newCmt = $('.comment_replay').val();
+        if(newCmt === '' || newCmt == null){
+            alert('Bạn không thể gửi comment mà không nhập nội dung!');
+            return false;
+        }
+        $.ajax({
+            type: "GET",
+            url: "{{ route('comment.exersire') }}",
+            data: {
+                newCmt: newCmt,
+                ex_id: ex_id,
+                parent_id:parent_comment,
+                _token: "{{ csrf_token() }}"
+                },
+            success: function (result) {
+                $('.comment_replay').val(null);
+                $('#comments').html(result);
+            },
+            error: function (result) {
+            }
+        });
+    }
+
+    function cancel_reply(){
+        $('.reply_comment').remove();
+    }
+
     </script>
     @stack('scripts')
 </body>

@@ -35,11 +35,13 @@ class SubjectController extends Controller
         ]);
     }
 
-    public function indexSubject(ExerciseType $exerciseType, $slugSubject, $slugClass)
+    public function indexSubject(Exersires $exersires, ExerciseType $exerciseType, $slugSubject, $slugClass)
     {
         $class = Classes::where('slug', $slugClass)->first();
         $subject = Subject::where('slug', $slugSubject)->first();
-        $list = $exerciseType->getTypeEx(1, $class->id, $subject->id);
+
+        $list = $exersires->getExByClass($class->id, $subject->id);
+
         return view('subject.list_all_type')->with([
             'list'=>$list
         ]);

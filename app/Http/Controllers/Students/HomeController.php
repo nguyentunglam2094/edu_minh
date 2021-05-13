@@ -16,10 +16,10 @@ class HomeController extends Controller
     /**
      *  view home page
      */
-    public function index(Teachers $teachers, ExerciseType $exerciseType, Banners $banners, Themes $themes)
+    public function index(Teachers $teachers, Banners $banners, Themes $themes, Exersires $exersires)
     {
         $listTeacher = $teachers->getTeachers();
-        $listEx = $themes->getListTheme();
+        $listEx = $exersires->getExersires();
         $listBanner = $banners->orderBy('id','desc')->get();
 
         return view('dashboard.dashboard')->with([
