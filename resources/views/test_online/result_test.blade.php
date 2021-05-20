@@ -146,7 +146,7 @@
                         <h4 id="test_title"></h4>
                         <h5 id="number_question"></h5>
 
-                        <strong>Lời giải</strong>
+                        <strong style="font-size: 20px">Lời giải</strong>
 
                         <div class="detail_exercise">
                             <div class="col-lg-12 col-md-12">
