@@ -14,7 +14,6 @@
                     @case(3) C @break
                     @case(4) D @break
                     @default
-                    Câu tự luận
                 @endswitch</strong>
             </div>
             <div class="col-lg-12 col-md-12">

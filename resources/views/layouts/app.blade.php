@@ -12,7 +12,16 @@
     <link rel="stylesheet" href="{{ asset('webstudent/css/custom.css') }}">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
     <link rel="shortcut icon" href="{{ asset('images/Artboard1.png') }}" type="image/x-icon">
+
+    <meta property="og:title" content="Trung tâm Bright Star">
+    <meta property="og:description" content="">
+    <meta property="og:site_name" content="Trung tâm Bright Star">
+    <meta property="og:image" content="{{ asset('images/image_share_link.jpg') }}" />
+    <meta property="og:image:height" content="300">
+    <meta property="og:image:width" content="300">
+
     @yield('css')
+
 </head>
 <body>
     <div class="wrap">
