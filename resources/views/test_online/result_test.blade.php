@@ -45,7 +45,12 @@
                                     }
                                 ?>
                                 <div class="question_answer">
-                                    <div class="title_question">Câu {{ $answer->question_number }}: <span><a href="javascript:void(0);" style="font-style: 14px !important;">Xem đáp án</a></span></div>
+                                    <div class="title_question">Câu {{ $answer->question_number }}: <span><a class="check_answer"
+                                        href="javascript:void(0);" style="font-style: 14px !important;"
+                                        data-image="{{ asset($answer->image_answer) }}" data-testtitle="{{ $detail->title }}" data-numberq={{ $answer->question_number }}>
+                                        Xem đáp án
+                                    </a></span></div>
+
                                     @if ($check)
                                         <label class="content_answer_text">
                                             <span class="checkmark {{ $answer->selected_question == 1 ? 'active3' : '' }}">A</span>
@@ -87,9 +92,11 @@
         <div class="col-md-12" id="fbcomment">
             <div class="header_comment">
                 <div class="row">
-                    <div class="col-md-6 text-left">
+
+                    {{-- <div class="col-md-6 text-left">
                       <span class="count_comment">264235 Comments</span>
-                    </div>
+                    </div> --}}
+
                     {{-- <div class="col-md-6 text-right">
                       <span class="sort_title">Sort by</span>
                       <select class="sort_by">
@@ -129,7 +136,34 @@
             </div>
         </div>
     </div>
+
+    <!-- Large modal -->
+    <div class="modal fade bd-example-modal-lg" id="answer_test" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <section class="detail_teacher detail_subject">
+                    <div class="container">
+                        <h4 id="test_title"></h4>
+                        <h5 id="number_question"></h5>
+
+                        <strong>Lời giải</strong>
+
+                        <div class="detail_exercise">
+                            <div class="col-lg-12 col-md-12">
+                                <img src="" id="image_answer" alt="" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+
+
 </section>
+
+
 
 @endsection
 @push('scripts')
@@ -264,6 +298,20 @@
     function cancel_reply(){
         $('.reply_comment').remove();
     }
+</script>
+
+<script>
+    $('body').on('click', '.check_answer', function(e){
+        let image = $(this).data('image');
+        let test_title = $(this).data('testtitle');
+        let numberq = $(this).data('numberq');
+
+        $('#test_title').html(test_title);
+        $('#number_question').html('Câu số: ' + numberq);
+        $('#image_answer').attr('src', image);
+
+        $('#answer_test').modal('show');
+    })
 </script>
 @endpush
 
