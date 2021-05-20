@@ -8,7 +8,7 @@
                 <img src="{{ asset(!empty($detail->image_question) ? $detail->image_question : 'images/no-image.png') }}" alt="" class="img-fluid">
             </div>
             <div class="col-lg-12 col-md-12" style="margin-top: 15px; margin-bottom: 15px" >
-                <strong> Đáp án: @switch($detail->selected_question)
+                <strong style="font-size: 20px"> Đáp án: @switch($detail->selected_question)
                     @case(1) A @break
                     @case(2) B @break
                     @case(3) C @break
