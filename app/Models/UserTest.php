@@ -59,10 +59,7 @@ class UserTest extends Model
         $userAnswer = [];
         $answer_corredt = 0;
         foreach($detailTest->answers as $val){
-            $select = 0;
-            if(!empty($request->answer[$val->question_number])){
-                $select = $request->answer[$val->question_number];
-            }
+            $select = !empty($request->answer[$val->question_number]) ? $request->answer[$val->question_number] : 0;
             if($select == $val->selected_question){
                 $answer_corredt++;
             }
@@ -74,7 +71,6 @@ class UserTest extends Model
         }
         //tổng số câu đúng -> tổng số câu
         // 1 điểm -> 10 điểm
-
         if(!empty($userAnswer)){
             $userAn->insert($userAnswer);
             $this->where($this->primaryKey, $user_test_id)->update([

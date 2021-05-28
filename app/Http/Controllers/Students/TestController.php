@@ -35,9 +35,16 @@ class TestController extends Controller
     {
         $result = $userTest->detailTestUser($id);
         $detail = $test->getDetailTest($result->test_id);
+        //tính điểm
+        //số câu đúng ------ tổng số câu
+        // ? điểm     ------ 10 điểm
+        $count = (10 * $result->answer_corredt) / $detail->question_number;
+        $count = round($count, 2);
+
         return view('test_online.result_test')->with([
             'detail'=>$detail,
-            'result'=>$result
+            'result'=>$result,
+            'count'=>$count,
         ]);
     }
 

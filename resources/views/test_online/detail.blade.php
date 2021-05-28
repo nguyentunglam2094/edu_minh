@@ -8,7 +8,8 @@
 <section class="online_test">
     <div class="container">
         <h2>Luyện thi online</h2>
-        <h4>{{ $detail->code . '. ' . $detail->title }}</h4>
+        <h4>{{ $detail->title }}</h4>
+
         <div class="row mt-4">
             <div class="col-lg-8 col-md-8">
                 <div class="box_pdf_test_online">
@@ -17,6 +18,10 @@
             </div>
             <div class="col-lg-4 col-md-4">
                 <div class="card card_answer">
+                    <div class="card-header">
+                        Thời gian làm bài {{ $detail->min }} phút!
+                        <h4 id="time">{{ $detail->min }}:00</h4>
+                    </div>
                     <div class="card-header" style="font-weight: 600;">
                         Các câu đã làm
                     </div>
@@ -29,16 +34,18 @@
                             @endfor
 
                         </div>
-                        <button type="button" class="form-control btn btn-primary submit">Nộp bài</button>
+                        <button type="button" class="form-control btn btn-success" id="start_test">BẮT ĐẦU LÀM</button>
+
+                        <button type="button" class="form-control btn btn-primary submit" id="end_test">NỘP BÀI</button>
                     </div>
                 </div>
-                <div class="card card_question mt-4">
+                <div class="card card_question mt-4" id="input_answer">
                     <div class="card-header" style="font-weight: 600;">
                         Điền đáp án
                     </div>
                     <div class="card-body">
                         <div class="list_question" id="listQuestion">
-                            <form action="{{ route('end.test') }}" method="POST">
+                            <form action="{{ route('end.test') }}" method="POST" id="user_test">
                                 @csrf
                                 <input type="hidden" name="test_id" value="{{ $detail->id }}">
                                 @for ($i = 1; $i <= $detail->question_number; $i++)
@@ -99,7 +106,7 @@
             <div class="header_comment">
                 <div class="row">
                     <div class="col-md-6 text-left">
-                      <span class="count_comment">264235 Comments</span>
+                      <span class="count_comment"></span>
                     </div>
                     {{-- <div class="col-md-6 text-right">
                       <span class="sort_title">Sort by</span>
@@ -145,6 +152,44 @@
 
 @endsection
 @push('scripts')
+
+<script>
+    function startTimer(duration, display) {
+        var timer = duration, minutes, seconds;
+        setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = minutes + ":" + seconds;
+
+            if (--timer < 0) {
+                //submit form user_test
+                $('#user_test').submit();
+                return false;
+            }
+        }, 1000);
+    }
+
+    $( document ).ready(function() {
+        loadComment();
+        $('#input_answer').hide();
+        $('#end_test').hide();
+    });
+
+    $('#start_test').on('click', function(e){
+        var fiveMinutes = 60 * {{ $detail->min }},
+            display = document.querySelector('#time');
+            startTimer(fiveMinutes, display);
+        $(this).hide();
+        $('#end_test').show();
+        $('#input_answer').show();
+    })
+
+</script>
+
 <script>
     $('.select_answer').on('click', function(e){
         let number = $(this).data('number');
@@ -161,9 +206,6 @@
     });
 
     var ex_id = {{ $detail->id }};
-    $( document ).ready(function() {
-        loadComment();
-    });
 
     function loadComment(){
         $.ajax({

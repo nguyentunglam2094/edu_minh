@@ -17,7 +17,7 @@
             </div>
             <div class="col-lg-4 col-md-4">
                 <div class="card card_answer">
-                    <div class="card-header" style="font-weight: 600;">Kết quả: {{ $result->answer_corredt .'/'.$detail->question_number }}</div>
+                    <div class="card-header" style="font-weight: 600;">Kết quả: {{ $result->answer_corredt .'/'.$detail->question_number }} --- Điểm đạt được: {{ $count }} Điểm</div>
                     <div class="card-body">
                         <div class="list_answer">
                             {{-- <div class="item_answer ">1</div>
@@ -29,7 +29,7 @@
                                 <div class="item_answer {{ $checkAnswer->answer == $answer->selected_question ? 'active' : 'danger' }}">{{ $answer->question_number }}</div>
                             @endforeach
                         </div>
-                        <button type="button" class="form-control btn btn-primary submit">Làm lại</button>
+                        <a class="form-control btn btn-primary" href="{{ route('test.online', $detail->id) }}">Làm lại</a>
                     </div>
                 </div>
                 <div class="card card_question mt-4">
