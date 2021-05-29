@@ -73,6 +73,10 @@ class Ultilities
             $test =  Carbon::createFromFormat('m/d/Y', $date)->format('m/d/Y');
             return date("Y/m/d", strtotime($test));
         }
+        if($type == 1){
+            $test =  Carbon::createFromFormat('d/m/Y', $date)->format('m/d/Y');
+            return date("Y/m/d", strtotime($test));
+        }
         if ($type == 2) {
             return date("d/m/Y", strtotime($date));
         }

@@ -62,7 +62,7 @@ class Users extends Authenticatable
             'email'=>Ultilities::clearXSS($request->email),
             'name'=>Ultilities::clearXSS($request->name),
             'phone'=>Ultilities::clearXSS($request->phone),
-            'dob'=>Ultilities::formatDate($request->dob),
+            'dob'=>Ultilities::formatDate($request->dob, 1),
             'password'=>bcrypt(Ultilities::clearXSS($request->password)),
         ];
         return $this->create($data);

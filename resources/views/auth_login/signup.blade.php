@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Đăng ký tài khoản')
 @section('css')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" type="text/css" />
 @endsection
 @section('content')
 
@@ -43,19 +43,13 @@
 
                     <div class="form-group">
                         <label>Ngày sinh <span class="text-danger">*</span></label>
-                        <div class="input-group date" data-provide="datepicker">
-                            <input type="text" class="form-control" name="dob" value="{{ old('dob') }}">
-                            <div class="input-group-addon">
-                                <span class="glyphicon glyphicon-th"></span>
-                            </div>
+                        <div class="input-group">
+                            <input id="txtDate" type="text" name="dob" value="{{ old('dob') }}" class="form-control date-input" readonly="readonly" />
                         </div>
                         @if ($errors->has('dob'))
                             <span class="invalid">{{ $errors->first('dob') }}</span>
                         @endif
                     </div>
-
-
-
 
 
                     <div class="form-group">
@@ -101,9 +95,13 @@
 
 @endsection
 @push('scripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
-<script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#txtDate').datepicker({
+            format: "dd/mm/yyyy"
+        });
+    });
 </script>
 @endpush
 

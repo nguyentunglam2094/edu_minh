@@ -47,7 +47,7 @@ class Exersires extends Model
         if($type_id != 0){
             return $this->where('exercises_type_id', $type_id)->with('typeExercire')->orderBy('id','desc')->take(20)->get();
         }
-        return $this->with('typeExercire')->orderBy('id','desc')->take(20)->get();
+        return $this->with('typeExercire')->orderBy('id','desc')->take(12)->get();
     }
 
 
