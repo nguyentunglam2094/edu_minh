@@ -56,6 +56,13 @@ class Users extends Authenticatable
         return $key;
     }
 
+    public function updatePassword($email, $pass)
+    {
+        return $this->where('email', $email)->update([
+            'password'=>bcrypt($pass)
+        ]);
+    }
+
     public function register($request)
     {
         $data = [

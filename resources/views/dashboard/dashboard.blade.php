@@ -39,26 +39,26 @@
             <div class="col-lg-10 col-md-10">
                 <h2>Thông tin giáo viên</h2>
             </div>
-            <div class="col-lg-2 col-md-2 d-flex align-items-center justify-content-end">
+            {{-- <div class="col-lg-2 col-md-2 d-flex align-items-center justify-content-end">
                 <a href="#" class="review_all">Xem tất cả <i class="fas fa-angle-right"></i></a>
-            </div>
+            </div> --}}
         </div>
         <div class="carousel-wrap">
             <div class="owl-carousel">
                 @if ($teachers->count() > 0)
                     @foreach ($teachers as $teacher)
                     <div class="item">
-                        <a href="#">
+                        <a href="{{ route('detail.teacher', $teacher->id) }}">
                             <div class="img_item">
                                 <img src="{{ !empty($teacher->avatar) ? asset($teacher->avatar) : asset('/images/no-avatar-7.png') }}" alt="">
                             </div>
                         </a>
                         <div class="box_infor">
-                            <h4><a href="#">{{ $teacher->gender == 1 ? 'Mr' : 'Ms' }}. {{ $teacher->name }}</a></h4>
+                            <h4><a href="{{ route('detail.teacher', $teacher->id) }}">{{ $teacher->name }}</a></h4>
                             <div class="description">
                                 {!! $teacher->description !!}
                             </div>
-                            <a href="#" class="link_detail">Xem chi tiết</a>
+                            <a href="{{ route('detail.teacher', $teacher->id) }}" class="link_detail">Xem chi tiết</a>
                         </div>
                     </div>
                     @endforeach

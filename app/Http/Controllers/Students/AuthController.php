@@ -32,9 +32,10 @@ class AuthController extends Controller
             return back()->with('error','Tài khoản của bạn chưa được kích hoạt');
         }
 
-        if(!empty(session()->get('url.intended'))){
-            return redirect()->intended(session()->get('url.intended'));
-        }
+        // if(!empty(session()->get('url.intended'))){
+
+        //     return redirect()->intended(session()->get('url.intended'));
+        // }
         return redirect()->route('home.page');
     }
 

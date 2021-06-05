@@ -29,6 +29,16 @@ class HomeController extends Controller
         ]);
     }
 
+    public function detailTeacher(Request $request, Teachers $teachers, $id)
+    {
+        $detail = $teachers->detail($id);
+        $otherTeachers = $teachers->where('id', '<>', $id)->get();
+        return view('teachers.index')->with([
+            'detail'=>$detail,
+            'otherTeachers'=>$otherTeachers
+        ]);
+    }
+
     public function searchCode(Request $request, Exersires $exersires)
     {
         $listEx = $exersires->searchCodeExer($request->search);

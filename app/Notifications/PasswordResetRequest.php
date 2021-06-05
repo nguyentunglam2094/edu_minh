@@ -18,11 +18,10 @@ class PasswordResetRequest extends Notification
      *
      * @return void
      */
-    public function __construct($token, $email, $type)
+    public function __construct($token, $email)
     {
         $this->token = $token;
         $this->email = $email;
-        $this->type = $type;
     }
 
     /**
@@ -50,12 +49,11 @@ class PasswordResetRequest extends Notification
 		$payload = array(
 			'token' => $this->token,
 			'email' =>  $this->email,
-            'type' => $this->type,
             'exp' => $exp,
         );
-        $token = JWT::encode($payload,KEY_TOKEN);
-
+        $token = JWT::encode($payload, 'RG9uc3NUUU9JQzVUcUs0ZGNMcFpjRG8yaFZjS3BEMXA=');
         return (new MailMessage)
+            ->subject('【Sright Star】 Forgot Password')
             ->line('You are receiving this email because we  received a password reset request for your account.')
             // ->line(new HtmlString("Your new password : <b>$this->token</b>"))
             ->action('Reset Password', route('view.reset.pass', $token))

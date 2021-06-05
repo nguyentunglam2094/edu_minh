@@ -20,13 +20,16 @@ Route::group(['namespace' => 'Students'], function () {
     route::get('/dang-ky-tai-khoan', 'AuthController@viewSignup')->name('signup.view');
     route::post('/signup', 'AuthController@signup')->name('signup');
     // route::get('trang-chu', 'HomeController@index')->name('home.page');
+    route::get('/quen-mat-khau', 'PasswordController@viewReset')->name('view.reset.password');
+    route::post('/quen-mat-khau', 'PasswordController@reset')->name('reset.password');
+    route::post('/xac-nhan-email', 'PasswordController@confirmEmail')->name('confirm.email');
+    route::get('/quen-mat-khau/{token}', 'PasswordController@getViewReset')->name('view.reset.pass');
 
+    route::get('/', 'HomeController@index')->name('home.page');
 
     //cần login, thi online cũng cần đăng nhập
     Route::group(['middleware' => ['logged']], function () {
-
-        route::get('/', 'HomeController@index')->name('home.page');
-
+        route::get('giao-vien/{id}', 'HomeController@detailTeacher')->name('detail.teacher');
         Route::group(['prefix' => 'dang-bai-tap'], function () {
             route::get('/', 'SubjectController@index')->name('list.subject');
             //chủ đề

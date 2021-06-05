@@ -21,6 +21,16 @@ class Teachers extends Model
         return $key;
     }
 
+    public function subject()
+    {
+        return $this->hasOne(Subject::class, 'id', 'subject_id');
+    }
+
+    public function detail($id)
+    {
+        return $this->where($this->primaryKey, $id)->with('subject')->first();
+    }
+
     /**
      * get all teachers
      */

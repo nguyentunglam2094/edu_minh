@@ -45,7 +45,11 @@
                     <span class="invalid">{{ $message }}</span>
                 @endif
 
+                <div class="form-group text-danger" style="text-align: right">
+                    <a href="{{ route('view.reset.password') }}" class="text-danger">Quên mật khẩu</a>
+                </div>
               </div>
+
               <div class="modal-footer justify-content-center">
                 <button type="submit" class="btn btn-primary form-control">Đăng nhập</button>
                 <p class="mb-0">Bạn chưa có tài khoản? <a href="{{ route('signup.view') }}" class="text-danger">Đăng ký</a></p>
