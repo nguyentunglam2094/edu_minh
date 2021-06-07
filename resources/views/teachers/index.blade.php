@@ -41,7 +41,7 @@
                 <div class="item">
                     <a href="{{ route('detail.teacher', $teacher->id) }}">
                         <div class="img_item">
-                            <img src="{{ !empty($teacher->image) ? asset($teacher->image) : asset('images/no-image.png') }}" alt="">
+                            <img src="{{ !empty($teacher->avatar) ? asset($teacher->avatar) : asset('images/no-image.png') }}" alt="">
                         </div>
                     </a>
                     <div class="box_infor">

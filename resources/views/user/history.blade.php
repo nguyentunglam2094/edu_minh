@@ -19,19 +19,21 @@
         <div class="list_subject">
             <div class="row">
                 @foreach ($list as $test)
-                <div class="col-lg-3 col-md-3 mb-4">
-                    <div class="item_subject">
-                        <div class="img_subject">
-                            <img src="{{ asset('images/22qc7r28-1400667334.jpg') }}" alt="" class="img-fluid">
-                        </div>
-                        <div class="infor_subject">
-                            <h4>{{ $test->test->code . '. ' . $test->test->title }}</h4>
-                            <p>Số câu trả lời đúng: {{ $test->answer_corredt . '/' .$test->test->question_number }}</p>
-                            <p>Thời gian: {{ date('d-m-Y H:i', strtotime($test->date)) }}</p>
-                            <a href="{{ route('test.online', $test->test_id) }}" class="test-again">Làm lại đề thi</a>
-                        </div>
-                    </div>
-                </div>
+                  @if (!empty( $test->test ))
+                    <div class="col-lg-3 col-md-3 mb-4">
+                      <div class="item_subject">
+                          <div class="img_subject">
+                              <img src="{{ asset('images/22qc7r28-1400667334.jpg') }}" alt="" class="img-fluid">
+                          </div>
+                          <div class="infor_subject">
+                              <h4>{{ $test->test->code . '. ' . $test->test->title }}</h4>
+                              <p>Số câu trả lời đúng: {{ $test->answer_corredt . '/' .$test->test->question_number }}</p>
+                              <p>Thời gian: {{ date('d-m-Y H:i', strtotime($test->date)) }}</p>
+                              <a href="{{ route('test.online', $test->test_id) }}" class="test-again">Làm lại đề thi</a>
+                          </div>
+                      </div>
+                  </div>
+                @endif
                 @endforeach
             </div>
             {{-- <nav aria-label="Page navigation example">
