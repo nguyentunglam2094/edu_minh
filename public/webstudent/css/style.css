@@ -920,7 +920,7 @@ header .close {
 
 .online_test .card_question .list_question .content_answer_text input:checked ~ .checkmark {
   color: #2392ec;
-  background-color: #d9edfe;
+  background-color: #053660;
 }
 
 .online_test .card_question #listQuestion::-webkit-scrollbar-track {

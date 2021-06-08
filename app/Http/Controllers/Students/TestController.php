@@ -31,7 +31,7 @@ class TestController extends Controller
         ]);
     }
 
-    public function resultTest(Request $request, UserTest $userTest, Tests $test, $id)
+    public function resultTest(UserTest $userTest, Tests $test, $id)
     {
         $result = $userTest->detailTestUser($id);
         $detail = $test->getDetailTest($result->test_id);
