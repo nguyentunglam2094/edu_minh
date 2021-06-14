@@ -26,10 +26,10 @@ Route::group(['namespace' => 'Students'], function () {
     route::get('/quen-mat-khau/{token}', 'PasswordController@getViewReset')->name('view.reset.pass');
 
     route::get('/', 'HomeController@index')->name('home.page');
+    route::get('giao-vien/{id}', 'HomeController@detailTeacher')->name('detail.teacher');
 
     //cần login, thi online cũng cần đăng nhập
     Route::group(['middleware' => ['logged']], function () {
-        route::get('giao-vien/{id}', 'HomeController@detailTeacher')->name('detail.teacher');
         Route::group(['prefix' => 'dang-bai-tap'], function () {
             route::get('/', 'SubjectController@index')->name('list.subject');
             //chủ đề
