@@ -1,6 +1,6 @@
 <div class="modal-header">
     <h5 class="modal-title">Chi tiết đáp án</h5>
-    <button type="button" class="close" style="display: block;" data-dismiss="modal" aria-label="Close">
+    <button type="button" class="close" style="display: contents;" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">x</span>
     </button>
 
