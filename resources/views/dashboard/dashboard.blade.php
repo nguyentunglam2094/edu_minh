@@ -121,29 +121,29 @@
     //     loadComment(ex_id)
     // });
 
-    $('body').on('click', '#post_comment', function(e){
-        let newCmt = $('#new_comment').val();
+    // $('body').on('click', '#post_comment', function(e){
+    //     let newCmt = $('#new_comment').val();
 
-        if(newCmt === '' || newCmt == null){
-            alert('Bạn không thể gửi comment mà không nhập nội dung!');
-            return false;
-        }
-        $.ajax({
-            type: "GET",
-            url: "{{ route('comment.exersire') }}",
-            data: {
-                newCmt: newCmt,
-                ex_id: ex_id,
-                _token: "{{ csrf_token() }}"
-                },
-            success: function (result) {
-                $('#new_comment').val(null);
-                $('#comments').html(result);
-            },
-            error: function (result) {
-            }
-        });
-    });
+    //     if(newCmt === '' || newCmt == null){
+    //         alert('Bạn không thể gửi comment mà không nhập nội dung!');
+    //         return false;
+    //     }
+    //     $.ajax({
+    //         type: "GET",
+    //         url: "{{ route('comment.exersire') }}",
+    //         data: {
+    //             newCmt: newCmt,
+    //             ex_id: ex_id,
+    //             _token: "{{ csrf_token() }}"
+    //             },
+    //         success: function (result) {
+    //             $('#new_comment').val(null);
+    //             $('#comments').html(result);
+    //         },
+    //         error: function (result) {
+    //         }
+    //     });
+    // });
 
     $('body').on('click', '.replay', function (e) {
         cancel_reply();

@@ -4,8 +4,81 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0f3a9c29c2be635d8d5a0f80f4be5fcf",
+    "content-hash": "6e4694d823c4119760d07253fef946b5",
     "packages": [
+        {
+            "name": "apility/laravel-fcm",
+            "version": "v1.4.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/apility/Laravel-FCM.git",
+                "reference": "e1484d3831f346d5dc03d64c742e53b6f500f33c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/apility/Laravel-FCM/zipball/e1484d3831f346d5dc03d64c742e53b6f500f33c",
+                "reference": "e1484d3831f346d5dc03d64c742e53b6f500f33c",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.0|^7.0",
+                "illuminate/support": "^5.0|^6.0|^7.0|^8.0",
+                "monolog/monolog": "^1.0|^2.0",
+                "php": ">=5.5.9"
+            },
+            "replace": {
+                "brozot/laravel-fcm": "*"
+            },
+            "require-dev": {
+                "laravel/laravel": "5.2.*",
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "4.7.*",
+                "satooshi/php-coveralls": "dev-master"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "LaravelFCM\\FCMServiceProvider"
+                    ],
+                    "aliases": {
+                        "FCM": "LaravelFCM\\Facades\\FCM",
+                        "FCMGroup": "LaravelFCM\\Facades\\FCMGroup"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LaravelFCM\\": "src/",
+                    "LaravelFCM\\Mocks\\": "tests/mocks"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Brosy",
+                    "email": "nicolas.brosy@gmail.com"
+                },
+                {
+                    "name": "Thomas Alrek",
+                    "email": "thomas@apility.no"
+                }
+            ],
+            "description": "Laravel / Lumen package for Firebase Cloud Messaging ",
+            "keywords": [
+                "FCM",
+                "Firebase Cloud Messaging",
+                "firebase",
+                "laravel",
+                "lumen",
+                "notification",
+                "push"
+            ],
+            "time": "2020-11-19T06:05:53+00:00"
+        },
         {
             "name": "asm89/stack-cors",
             "version": "v2.0.2",
@@ -6828,12 +6901,12 @@
             "version": "1.9.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/webmozart/assert.git",
+                "url": "https://github.com/webmozarts/assert.git",
                 "reference": "bafc69caeb4d49c39fd0779086c03a3738cbb389"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozart/assert/zipball/bafc69caeb4d49c39fd0779086c03a3738cbb389",
+                "url": "https://api.github.com/repos/webmozarts/assert/zipball/bafc69caeb4d49c39fd0779086c03a3738cbb389",
                 "reference": "bafc69caeb4d49c39fd0779086c03a3738cbb389",
                 "shasum": ""
             },

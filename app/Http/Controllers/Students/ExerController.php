@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Students;
 
 use App\Http\Controllers\Controller;
+use App\Libraries\Ultilities;
 use App\Models\Comments;
 use App\Models\Exersires;
+use App\Models\PushNotifications;
+use App\Models\Teachers;
 use Illuminate\Http\Request;
 
 class ExerController extends Controller
@@ -29,6 +32,13 @@ class ExerController extends Controller
             if(!empty($request->newCmt)){
                 $comments->saveComment($request);
                 $list = $comments->getCommentByExer($request->ex_id);
+
+                //notification
+                //get admin
+                $teacherArr = Teachers::get()->pluck('id')->toArray();
+                Ultilities::pushNotifyToUsers($request->user()->id,  $teacherArr, 'Bình luận bài tập mới', $request->user()->name . ' đã bình luận một bài tập',
+                PushNotifications::TYPE_GROUP, PushNotifications::SOURCE_STUDENT, PushNotifications::SOURCE_ADMIN, 'detailexersire', $request->ex_id);
+
                 return view('exersire.comments')->with([
                     'listComment'=>$list
                 ]);

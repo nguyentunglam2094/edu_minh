@@ -51,6 +51,7 @@ Route::group(['namespace' => 'Students'], function () {
             route::get('/ket-qua/{id}', 'TestController@resultTest')->name('result.test');
         });
 
+        route::post('/update-token-device', 'AuthController@updateDevice')->name('update.token.device');
 
         route::get('tim-kiem', 'HomeController@searchCode')->name('search.code');
         route::get('cap-nhap-thong-tin-ca-nhan', 'AuthController@updateProfile')->name('update.profile.view');

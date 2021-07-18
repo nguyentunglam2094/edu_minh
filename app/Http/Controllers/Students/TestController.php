@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Students;
 
 use App\Http\Controllers\Controller;
+use App\Libraries\Ultilities;
 use App\Models\Comments;
+use App\Models\PushNotifications;
 use App\Models\Subject;
+use App\Models\Teachers;
 use App\Models\Tests;
 use App\Models\UserAnswer;
 use App\Models\UserTest;
@@ -69,6 +72,9 @@ class TestController extends Controller
         if($request->ajax()){
             if(!empty($request->newCmt)){
                 $comments->saveComment($request, 1);
+                $teacherArr = Teachers::get()->pluck('id')->toArray();
+                Ultilities::pushNotifyToUsers($request->user()->id,  $teacherArr, 'Bình luận bài thi mới', $request->user()->name . ' đã bình luận một bài thi',
+                PushNotifications::TYPE_GROUP, PushNotifications::SOURCE_STUDENT, PushNotifications::SOURCE_ADMIN, 'detailtest', $request->ex_id);
             }
             //get comment
             $list = $comments->getCommentByTest($request->ex_id);

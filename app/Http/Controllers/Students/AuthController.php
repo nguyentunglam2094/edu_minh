@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Students;
 
 use App\Http\Controllers\Controller;
 use App\Libraries\Ultilities;
+use App\Models\UserDevices;
 use App\Models\Users;
 use App\User;
 use Exception;
@@ -12,6 +13,25 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+        /**
+     * update device token client web
+     * @author lamnt
+     * @date 2020 07 17
+     */
+    public function updateDevice(Request $request, UserDevices $userDevices)
+    {
+        if (!\Auth::check()) {
+            return false;
+        }
+        try {
+            $userDevices->saveTokenDevice($request, UserDevices::SOURCE_STUDENT);
+        } catch (\Exception $ex) {
+            return response()->json([
+                'message' => __('api.save_token_failure'),
+            ], 500);
+        }
+    }
+
     //
     public function login(Request $request)
     {
