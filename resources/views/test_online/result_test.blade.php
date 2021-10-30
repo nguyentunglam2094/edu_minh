@@ -45,11 +45,13 @@
                                     }
                                 ?>
                                 <div class="question_answer">
-                                    <div class="title_question">Câu {{ $answer->question_number }}: <span><a class="check_answer"
-                                        href="javascript:void(0);" style="font-style: 14px !important;"
-                                        data-image="{{ asset($answer->image_answer) }}" data-testtitle="{{ $detail->title }}" data-numberq={{ $answer->question_number }}>
-                                        Xem đáp án
-                                    </a></span></div>
+                                    <div class="title_question">Câu {{ $answer->question_number }}: <span>
+                                        <a class="check_answer"
+                                            href="javascript:void(0);" style="font-style: 14px !important;"
+                                            data-image="{{ asset($answer->image_answer) }}" data-testtitle="{{ $detail->title }}" data-numberq={{ $answer->question_number }}>
+                                            Xem đáp án
+                                        </a></span>
+                                    </div>
 
                                     @if ($check)
                                         <label class="content_answer_text">
@@ -148,7 +150,7 @@
                         <h5 id="number_question"></h5>
                         <strong style="font-size: 20px">Lời giải</strong>
                         <div class="detail_exercise">
-                            <div class="col-lg-12 col-md-12">
+                            <div class="col-lg-12 col-md-12" id="list_image">
                                 <img src="" id="image_answer" alt="" class="img-fluid">
                             </div>
                         </div>
@@ -297,16 +299,21 @@
 
 <script>
     $('body').on('click', '.check_answer', function(e){
-        let image = $(this).data('image');
+        let image = $(this).data('image').split("|");
         let test_title = $(this).data('testtitle');
         let numberq = $(this).data('numberq');
 
         $('#test_title').html(test_title);
         $('#number_question').html('Câu số: ' + numberq);
-        $('#image_answer').attr('src', image);
 
+        // $('#image_answer').attr('src', image);
+        let listImage = '';
+        $.each(image, function( index, value ) {
+            listImage += '<img src="'+value+'" alt="" class="img-fluid">';
+        });
+        $('#list_image').html(listImage);
         $('#answer_test').modal('show');
-    })
+    });
 </script>
 @endpush
 
