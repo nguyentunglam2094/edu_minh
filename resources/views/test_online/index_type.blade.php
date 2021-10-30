@@ -156,7 +156,7 @@
                                 <div class="item_subject">
                                     <a href="{{ route('test.online', $test->id) }}">
                                         <div class="img_subject">
-                                            <img src="" alt="" class="img-fluid">
+                                            <img src="{{ asset('images/testImage.jpeg') }}" alt="" class="img-fluid">
                                         </div>
                                         <div class="infor_subject">
                                             <h4>{{ $test->title }}</h4>
