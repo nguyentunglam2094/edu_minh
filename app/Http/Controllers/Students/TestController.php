@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Students;
 
 use App\Http\Controllers\Controller;
 use App\Libraries\Ultilities;
+use App\Models\Classes;
 use App\Models\Comments;
 use App\Models\PushNotifications;
 use App\Models\Subject;
 use App\Models\Teachers;
 use App\Models\Tests;
+use App\Models\TestType;
 use App\Models\UserAnswer;
 use App\Models\UserTest;
 use Exception;
@@ -17,14 +19,54 @@ use Illuminate\Http\Request;
 class TestController extends Controller
 {
     //
-    public function indexTest(Subject $subject, Tests $tests, $slug)
+    public function indexTest(Subject $subject, Tests $tests, Classes $classes, $slug)
     {
         $detail = $subject->getDetailBySlug($slug);
+        if(empty($detail)){
+            return back();
+        }
         $testList = $tests->getBySubjectId($detail->id);
-        return view('test_online.index')->with([
-            'tests'=>$testList
+        //get all class
+        $listClass = $classes->with('testType')->get();
+        $title = "Tất cả đề thi môn " .$detail->title;
+        return view('test_online.index_type')->with([
+        // return view('test_online.index')->with([
+            'tests'=>$testList,
+            'listClass'=>$listClass,
+            'detail'=>$detail,
+            'title'=>$title,
         ]);
     }
+
+    public function typeTest(Subject $subject, Tests $tests, Classes $classes, $id, $slug)
+    {
+        $detail = $subject->getDetailBySlug($slug);
+        $typeTest = TestType::where('id', $id)->first();
+        if(empty($detail) || empty($typeTest)){
+            return back();
+        }
+        $listClass = $classes->with('testType')->get();
+        $testList = $tests->getBySubjectId($detail->id, $id);
+
+        $title = $typeTest->title .' môn ' .$detail->title;
+
+        return view('test_online.index_type')->with([
+        // return view('test_online.index')->with([
+            'tests'=>$testList,
+            'listClass'=>$listClass,
+            'detail'=>$detail,
+            'title'=>$title,
+        ]);
+    }
+
+    // public function indexTest(Subject $subject, Tests $tests, $slug)
+    // {
+    //     $detail = $subject->getDetailBySlug($slug);
+    //     $testList = $tests->getBySubjectId($detail->id);
+    //     return view('test_online.index')->with([
+    //         'tests'=>$testList
+    //     ]);
+    // }
 
     public function detail(Tests $test, $id)
     {

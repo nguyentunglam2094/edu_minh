@@ -45,7 +45,10 @@ Route::group(['namespace' => 'Students'], function () {
         route::get('/logout', 'AuthController@logout')->name('logout');
 
         Route::group(['prefix' => 'lam-bai-thi-online'], function () {
+
             route::get('/{slug}', 'TestController@indexTest')->name('index.test.online');
+            route::get('/loai-de-thi/{id}/{slug}', 'TestController@typeTest')->name('view.type.test');
+            // route::get('/{slug}', 'TestController@indexTest')->name('index.test.online');
             route::get('/de-thi/{id}', 'TestController@detail')->name('test.online');
             route::post('/nop-bai', 'TestController@endTest')->name('end.test');
             route::get('/ket-qua/{id}', 'TestController@resultTest')->name('result.test');

@@ -27,7 +27,11 @@
             </div>
             <div class="col-lg-12 col-md-12">
                 @if (!empty($detail->image_answer))
-                <img src="{{ asset($detail->image_answer) }}" alt="" class="img-fluid">
+                    @foreach (explode('|', $detail->image_answer) as $key=>$item)
+                        @if (!empty($item))
+                        <img src="{{ asset($item) }}" alt="" class="img-fluid">
+                        @endif
+                    @endforeach
                 @else
                     <strong>Chưa có lời giải</strong>
                 @endif

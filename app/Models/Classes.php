@@ -8,4 +8,8 @@ class Classes extends Model
 {
     //
     protected $table = 'classes';
+    public function testType()
+    {
+        return $this->hasMany(TestType::class, 'class_id');
+    }
 }

@@ -24,10 +24,13 @@ class Tests extends Model
         return $this->with(['subject', 'class'])->orderBy('id', 'desc')->get();
     }
 
-    public function getBySubjectId($subject_id)
+    public function getBySubjectId($subject_id, $testType = null)
     {
-        return $this->with(['subject', 'class'])->where('subject_id', $subject_id)
-        ->orderBy('id', 'desc')->paginate(16);
+        $data = $this->with(['subject', 'class'])->where('subject_id', $subject_id);
+        if(!empty($testType)){
+            $data = $data->where('test_type_id', $testType);
+        }
+        return $data->orderBy('id', 'desc')->paginate(16);
     }
 
     public function answers()
