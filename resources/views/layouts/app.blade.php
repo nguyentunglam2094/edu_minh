@@ -80,20 +80,20 @@
                 console.log("Unable to get permission to notify.", err);
             });
 
-            messaging.onMessage(function(payload, data) {
-                //kiểm tra số tin nhắn chưa đ
-                console.log("Message received. ", payload);
-                toastr.success(payload.notification.body,payload.notification.title, {
-                    onclick: function(){
-                        // var url = '{{ url('/detailTransaction/') }}/' + payload.data.id;
-                        // window.location.href = url;
-                        // update ajax push
-                        console.log('abcddddddd');
-                    }
-                });
-                //admin.detail.transaction
-                // NotisElem.innerHTML = NotisElem.innerHTML + JSON.stringify(payload)
-            });
+            // messaging.onMessage(function(payload, data) {
+            //     //kiểm tra số tin nhắn chưa đ
+            //     console.log("Message received. ", payload);
+            //     toastr.success(payload.notification.body,payload.notification.title, {
+            //         onclick: function(){
+            //             // var url = '{{ url('/detailTransaction/') }}/' + payload.data.id;
+            //             // window.location.href = url;
+            //             // update ajax push
+            //             console.log('abcddddddd');
+            //         }
+            //     });
+            //     //admin.detail.transaction
+            //     // NotisElem.innerHTML = NotisElem.innerHTML + JSON.stringify(payload)
+            // });
     </script>
 
     <script>

@@ -8,7 +8,7 @@ class Comments extends Model
 {
     //
     protected $table = 'comments';
-    protected $fillable = ['user_id','object_id', 'exercise_id', 'comment', 'parent_id'];
+    protected $fillable = ['user_id','teacher_id','object_id', 'exercise_id', 'comment', 'parent_id'];
 
     public function parentComment()
     {
@@ -18,13 +18,19 @@ class Comments extends Model
     {
         return $this->hasOne(Users::class, 'id', 'user_id');
     }
+
+    public function teacher()
+    {
+        return $this->hasOne(Teachers::class, 'id', 'teacher_id');
+    }
+
     /**
      * lấy danh sách comment theo id bài viết
      * @author lamtn
      */
     public function getCommentByExer($exer_id)
     {
-        return $this->with(['parentComment.user', 'user'])
+        return $this->with(['parentComment.user', 'user', 'teacher', 'parentComment.teacher'])
         ->where('parent_id', 0)->where('exercise_id', $exer_id)
         ->orderBy('id','desc')->get();
     }
@@ -36,7 +42,7 @@ class Comments extends Model
 
     public function getCommentByTest($exer_id)
     {
-        return $this->with(['parentComment.user', 'user'])
+        return $this->with(['parentComment.user', 'user', 'teacher', 'parentComment.teacher'])
         ->where('parent_id', 0)->where('object_id', $exer_id)
         ->orderBy('id','desc')->get();
     }

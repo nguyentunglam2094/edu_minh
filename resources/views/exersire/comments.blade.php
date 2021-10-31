@@ -2,11 +2,22 @@
     <!-- Start List Comment 1 -->
     @foreach ($listComment as $comment)
     <li class="box_result row">
-        <div class="avatar_comment col-md-1">
-            <img src="{{ !empty($comment->user->avatar) ? asset($comment->user->avatar) : 'https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg' }}" alt="avatar"/>
-        </div>
+        @if (!empty($comment->user))
+            <div class="avatar_comment col-md-1">
+                <img src="{{ !empty($comment->user->avatar) ? asset($comment->user->avatar) : 'https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg' }}" alt="avatar"/>
+            </div>
+        @else
+            <div class="avatar_comment col-md-1">
+                <img src="{{ !empty($comment->teacher->avatar) ? asset($comment->teacher->avatar) : 'https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg' }}" alt="avatar"/>
+            </div>
+        @endif
         <div class="result_comment col-md-11">
-            <h4>{{ !empty($comment->user) ? $comment->user->name : 'No name' }}</h4>
+            @if (!empty($comment->user))
+            <h4>{{ !empty($comment->user) ? $comment->user->name : 'No name' }} (Học sinh)</h4>
+            @else
+            <h4>{{ !empty($comment->teacher) ? $comment->teacher->name : 'No name' }} (Giáo viên)</h4>
+            @endif
+
             <p>{!! $comment->comment !!}</p>
             <div class="tools_comment">
                 {{--  <a class="like" href="javascript:void(0):">Like</a>
@@ -22,11 +33,21 @@
                 <ul class="child_replay">
                     @foreach ($comment->parentComment as $parentComment)
                     <li class="box_reply row ">
-                        <div class="avatar_comment col-md-1">
-                            <img src="{{ !empty($parentComment->user->avatar) ? asset($parentComment->user->avatar) : 'https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg' }}" alt="avatar"/>
-                        </div>
+                        @if (!empty($parentComment->user))
+                            <div class="avatar_comment col-md-1">
+                                <img src="{{ !empty($parentComment->user->avatar) ? asset($parentComment->user->avatar) : 'https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg' }}" alt="avatar"/>
+                            </div>
+                        @else
+                            <div class="avatar_comment col-md-1">
+                                <img src="{{ !empty($parentComment->teacher->avatar) ? asset($parentComment->teacher->avatar) : 'https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg' }}" alt="avatar"/>
+                            </div>
+                        @endif
                         <div class="result_comment col-md-11">
-                            <h4>{{ !empty($parentComment->user) ? $parentComment->user->name : 'No name' }}</h4>
+                            @if (!empty($parentComment->user))
+                                <h4>{{ !empty($parentComment->user) ? $parentComment->user->name : 'No name' }} (Học sinh)</h4>
+                            @else
+                                <h4>{{ !empty($parentComment->teacher) ? $parentComment->teacher->name : 'No name' }} (Giáo viên)</h4>
+                            @endif
                             <p>{!! $parentComment->comment !!}</p>
                             <div class="tools_comment">
                                 <span>{{ !empty($parentComment->created_at) ? date('H:i:s d-m-Y', strtotime($parentComment->created_at)) : 'N/a' }}</span>

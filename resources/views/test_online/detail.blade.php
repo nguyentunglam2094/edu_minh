@@ -136,7 +136,7 @@
                             <img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar" />
                             <i class="fa fa-caret-down"></i>
                           </span> --}}
-                          <button type="button" id="post_comment">Bình luận</button>
+                          <button type="button" id="post_comment_test">Bình luận</button>
                         </div>
                       </div>
                     </div>
@@ -223,7 +223,7 @@
         });
     }
 
-    $('#post_comment').on('click', function(e){
+    $('#post_comment_test').on('click', function(e){
         let newCmt = $('#new_comment').val();
         if(newCmt === '' || newCmt == null){
             alert('Bạn không thể gửi comment mà không nhập nội dung!');
