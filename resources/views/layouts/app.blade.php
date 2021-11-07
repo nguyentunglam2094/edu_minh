@@ -21,6 +21,16 @@
     <meta property="og:image:width" content="300">
 
     @yield('css')
+    <style>
+        .unread-noti{
+            background: #b1cbe1;
+        }
+
+        .view-notification{
+            cursor: pointer;
+        }
+
+    </style>
 
 </head>
 <body>
@@ -52,48 +62,21 @@
 
     <script src="{{ asset('webstudent/js/index.js') }}"></script>
 
-    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase.js"></script>
-    <script src="{{ asset('js/firebase.init.js') }}"></script>
-
-    <script>
-        const messaging = firebase.messaging();
-        messaging
-            .requestPermission()
-            .then(function () {
-                console.log("Notification permission granted.");
-                // console.log(messaging.getToken());
-                return messaging.getToken()
-            })
-            .then(function(token) {
-                console.log(token);
-                $.ajax({
-                    type:'POST',
-                    url: '{{ route('update.token.device') }}',
-                    data:{token : token, _token: "<?php echo csrf_token(); ?>"},
-                    success:function(data){
-                    //    console.log(data);
-                    }
-                });
-            })
-            .catch(function (err) {
-                console.log("Unable to get permission to notify.", err);
+<script>
+        $('body').on('click', '#view_notification', function(e){
+            $.ajax({
+                type: "GET",
+                url: "{{ route('get.list.notification') }}",
+                data: {
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function (result) {
+                    $('#notification_detail').html(result);
+                },
+                error: function (result) {
+                }
             });
-
-            // messaging.onMessage(function(payload, data) {
-            //     //kiểm tra số tin nhắn chưa đ
-            //     console.log("Message received. ", payload);
-            //     toastr.success(payload.notification.body,payload.notification.title, {
-            //         onclick: function(){
-            //             // var url = '{{ url('/detailTransaction/') }}/' + payload.data.id;
-            //             // window.location.href = url;
-            //             // update ajax push
-            //             console.log('abcddddddd');
-            //         }
-            //     });
-            //     //admin.detail.transaction
-            //     // NotisElem.innerHTML = NotisElem.innerHTML + JSON.stringify(payload)
-            // });
+        });
     </script>
 
     <script>
@@ -154,6 +137,32 @@
             type = 1;
             $('#detailEx').modal('show');
         }
+    });
+
+    $('body').on('click', '.view-notification', function(e){
+        ex_id = $(this).data('exid');
+        let screen = $(this).data('screen');
+
+        //update read notificaiton
+        $.ajax({
+            type: "GET",
+            url: "{{ route('read.notification') }}",
+            data: {
+                pushid:$(this).data('pushid'),
+                _token: "{{ csrf_token() }}"
+            },
+            success: function (result) {
+                if(screen == 'detailtest'){
+                    type = null;
+                    $('#detailEx').modal('show');
+                }else{
+                    window.location.href = $(this).data('url');
+                }
+                $('#count_notificaiton').html(result);
+            },
+            error: function (result) {
+            }
+        });
     });
 
     var ex_id;

@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use Illuminate\Notifications\Notifiable;
 use File;
+use Illuminate\Support\Facades\Auth;
+
 class Users extends Authenticatable
 {
     //

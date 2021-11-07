@@ -85,6 +85,6 @@ class SavePushNotification implements ShouldQueue
             $pushUser = new PushUser();
             $pushUser->insert($userPush);
         }
-        dispatch(new SendPushNotifications($pushId));
+        // dispatch(new SendPushNotifications($pushId));
     }
 }

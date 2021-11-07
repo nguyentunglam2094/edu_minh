@@ -52,7 +52,6 @@ class ExerController extends Controller
 
             $count = !empty($detailEx) ? $comments->countComment($detailEx->id) : null;
             $list = !empty($detailEx) ? $comments->getCommentByExer($detailEx->id) : null;
-
             return view('exersire.detail')->with([
                 'listComment'=>$list,
                 'detail'=>$detailEx,

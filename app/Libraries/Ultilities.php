@@ -63,6 +63,10 @@ class Ultilities
         return null;
     }
 
+    public static function countNotification()
+    {
+        dd(\Auth::user());
+    }
 
         /**
      * push notification

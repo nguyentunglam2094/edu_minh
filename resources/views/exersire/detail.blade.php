@@ -5,7 +5,7 @@
     </button>
 
 
-  </div>
+</div>
 
 @if (!empty($detail))
 <section class="detail_teacher detail_subject">

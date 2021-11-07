@@ -30,6 +30,9 @@ Route::group(['namespace' => 'Students'], function () {
 
     //cần login, thi online cũng cần đăng nhập
     Route::group(['middleware' => ['logged']], function () {
+        route::get('notifications', 'NotificationController@getNotifications')->name('get.list.notification');
+        route::get('read-notification', 'NotificationController@readNoti')->name('read.notification');
+
         Route::group(['prefix' => 'dang-bai-tap'], function () {
             route::get('/', 'SubjectController@index')->name('list.subject');
             //chủ đề

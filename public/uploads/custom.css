@@ -1,3 +1,19 @@
 .rounded-circle{
     width: 20%;
 }
+
+
+.number-notification {
+    position: absolute;
+    right: 45px;
+    font-size: 10px;
+    padding: 5px 5px;
+    border-radius: 50%;
+    background: red;
+    color: white;
+}
+
+.item-notification{
+    margin-top: -20px;
+}
+

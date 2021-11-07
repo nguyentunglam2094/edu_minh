@@ -37,6 +37,11 @@ class PushNotifications extends Model
         return $this->where($this->primaryKey, $id)->update($update);
     }
 
+    public function senderAdmin()
+    {
+        return $this->hasOne(Teachers::class, 'id', 'sender_id');
+    }
+
 
     /**
      * detail push by push id
