@@ -27,6 +27,12 @@ class Exersires extends Model
         return $this->hasOne(Classes::class, 'id', 'class_id');
     }
 
+    public function getImageQuestionAttribute($key)
+    {
+        $image = explode('|', $key);
+        return !empty($image[0]) ? $image[0] : $image[1];
+    }
+
     public function getDetail($id)
     {
         return $this->with(['typeExercire'])->where($this->primaryKey, $id)->first();
